@@ -401,6 +401,7 @@ fn clear() {
 
 // ----------- TESTS FOR RECOVERY -------------
 // Configuration Options:
+//
 // New cache, not file backed
 // ---- Cache is created new in main memory.
 // New cache, file backed
@@ -705,6 +706,7 @@ fn new_file_backed_cache_changed_and_restored() {
     // "latte" should now be in cache
     assert!(cache.get(b"latte").is_some());
 
+    
     assert_eq!(cache.items(), 1);
     assert_eq!(cache.segments.free(), SEGMENTS - 1);
 
