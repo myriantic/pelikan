@@ -15,9 +15,10 @@ def spawn_cache():
 def replay():
     os.chdir('/home/users/u6632448/rpc-perf')
     start = time.time()
+    # will execute until it is finished
     os.system('cargo run --release --bin rpc-replay -- --poolsize 100 --workers 4 --speed 1.0 --binary-trace --endpoint localhost:12321 --trace benchmarks/cluster052.zst')
     replay_time = time.time() - start
-    # TODO: implement actual shutdown signal in segcache
+    # TODO: implement actual shutdown signal in segcache and send shutdown signal to cache
     print("Time to replay the cache: {}".format(replay_time))
 
 if __name__ == '__main__':
