@@ -4,6 +4,7 @@
 
 import os
 import multiprocessing
+import time
 
 # spawn segcache
 def spawn_cache():
@@ -13,7 +14,11 @@ def spawn_cache():
 # replays trace but sending the requests to the cache
 def replay():
     os.chdir('/home/users/u6632448/rpc-perf')
+    start = time.time()
     os.system('cargo run --release --bin rpc-replay -- --poolsize 100 --workers 4 --speed 1.0 --binary-trace --endpoint localhost:12321 --trace benchmarks/cluster052.zst')
+    replay_time = time.time() - start
+    # TODO: implement actual shutdown signal in segcache
+    print("Time to replay the cache: {}".format(replay_time))
 
 if __name__ == '__main__':
     p1 = multiprocessing.Process(name='p1', target=spawn_cache)
