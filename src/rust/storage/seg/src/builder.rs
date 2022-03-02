@@ -221,9 +221,9 @@ impl Builder {
         }
 
         // Otherwise, create a new cache
-        let segments = self.segments_builder.build(None);
         let hashtable = HashTable::new(self.hash_power, self.overflow_factor);
         let ttl_buckets = TtlBuckets::new();
+        let segments = self.segments_builder.build(None);
 
         Seg {
             hashtable,
