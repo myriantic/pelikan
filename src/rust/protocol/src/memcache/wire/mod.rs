@@ -229,6 +229,13 @@ where
             MemcacheRequest::FlushAll => {
                 return None;
             }
+            MemcacheRequest::Stop => match self.stop() {
+                Ok(_) => MemcacheResult::Stopped,
+                Err(MemcacheStorageError::ServerError) => MemcacheResult::Error,
+                _ => {
+                    unreachable!()
+                }
+            },
         };
 
         Some(MemcacheResponse { request, result })
