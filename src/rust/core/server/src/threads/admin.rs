@@ -457,6 +457,9 @@ impl EventLoop for Admin {
                                     }
                                 }
 
+                                let mut child = std::process::Command::new("sleep").arg("6").spawn().unwrap();
+                                let _result = child.wait().unwrap();
+
                                 let _ = session.write(b"OK\r\n");
                                 session.finalize_response();
                                 ADMIN_RESPONSE_COMPOSE.increment();
