@@ -13,57 +13,34 @@ import subprocess
 
 pelikan = '/home/users/u6632448/pelikan'
 rpc_perf = '/home/users/u6632448/rpc-perf'
-
-# spawn segcache
-def spawn_cache():
-    cache_binary = 'target/release/pelikan_segcache_rs'
-    config = 'config/segcache_perf_analysis.toml'
-    
-    os.chdir(pelikan)
-    os.system(cache_binary+' '+config)
-
-
-# replays trace but sending the requests to the cache
-def replay():
-    trace = 'benchmarks/cluster052.zst'
-
-    os.chdir(rpc_perf)
-    replay_start = time.time()
-    # will execute until it is finished
-    os.system('cargo run --release --bin rpc-replay -- --poolsize 100 --workers 4 --speed 1.0 --binary-trace --endpoint localhost:12321 --trace '+trace)
-    replay_end = time.time()
-    replay_time = replay_end - replay_start
-    # send stop signal to admin port (gracefully shutsdown cache if configured to do so)
-    os.system('{ echo "stop"; sleep 1; exit; } | telnet localhost 9999')
-    # note - all but 1 threads are terminated. 
-    # So we need to manually terminate the cache.
-
-    #os.system("kill -9 {}".format(cache_pid))
-    p1.terminate()
-
-    print("Time to replay the cache: {}".format(replay_time))
-
-
 cache_binary = pelikan+"/"+'target/release/pelikan_segcache_rs'
 config = pelikan+"/"+'config/segcache_perf_analysis.toml'
 trace = 'benchmarks/cluster052.zst'
 replay_command = 'cargo run --release --bin rpc-replay -- --poolsize 100 --workers 4 --speed 1.0 --binary-trace --endpoint localhost:12321 --trace '+trace
-# spawn segcache
+
+# -------- Spawn Segcache as a non-blocking process ------------------------
 cache_spawn = subprocess.Popen([cache_binary,config])
-# replay the trace
+
+# -------- Replay the trace on the cache as a blocking process -------------
 os.chdir(rpc_perf)
 replay_start = time.time()
+# This sends cache requests to the server port
 replay = subprocess.Popen(replay_command.split())
+replay.wait()
 replay_time = time.time() - replay_start
-# send stop signal to admin port (gracefully shutsdown cache if configured to do so)
+
+# ------- Send stop signal to admin port -----------------------------------
+# gracefully shutsdown cache if configured to do so
+shutdown_start = time.time()
+# TODO: after the "stop" command is processed, we receive an "OK". This should be the
+# signal we are waiting for to "exit". This may wait for the "OK", need to check.
 os.system('{ echo "stop"; sleep 1; exit; } | telnet localhost 9999')
+
+# ------ Manually terminate the cache --------------------------------------
 # note - all but 1 threads are terminated. 
 # So we need to manually terminate the cache.
 cache_spawn.kill()
+shutdown_time = time.time() - shutdown_start
+# ------ Statistics --------------------------------------------------------
 print("Time to replay the cache: {}".format(replay_time))
-
-# if __name__ == '__main__':
-#     p1 = subprocess.run([''])
-#     p1.start()
-#     p2 = multiprocessing.Process(name='p2', target=replay)
-#     p2.start()
+print("Time to shutdown the cache: {}".format(shutdown_time))
