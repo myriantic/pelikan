@@ -34,6 +34,7 @@ impl Segcache {
 
         // initialize storage
         let storage = Storage::new(&config);
+        println!("check here that cache data and metadata has been sourced");
 
         let max_buffer_size = std::cmp::max(
             server::DEFAULT_BUFFER_SIZE,
