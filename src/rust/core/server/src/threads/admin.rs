@@ -72,6 +72,7 @@ pub struct Admin {
     signal_queue: QueuePairs<Signal, Signal>,
     parser: AdminRequestParser,
     log_drain: Box<dyn Drain>,
+    no_shutdown_received: bool,
 }
 
 impl Drop for Admin {
@@ -126,6 +127,8 @@ impl Admin {
 
         let signal_queue = QueuePairs::new(Some(poll.waker()));
 
+        let no_shutdown_received = true;
+
         Ok(Self {
             addr,
             timeout,
@@ -135,6 +138,7 @@ impl Admin {
             signal_queue,
             parser: AdminRequestParser::new(),
             log_drain,
+            no_shutdown_received,
         })
     }
 
@@ -309,7 +313,7 @@ impl Admin {
         let mut events = Events::with_capacity(self.nevent);
 
         // run in a loop, accepting new sessions and events on existing sessions
-        loop {
+        while self.no_shutdown_received { // TODO change to while
             ADMIN_EVENT_LOOP.increment();
 
             if self.poll.poll(&mut events, self.timeout).is_err() {

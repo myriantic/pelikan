@@ -12,8 +12,8 @@ import signal
 import subprocess
 import telnetlib
 
-pelikan = '/home/users/u6632448/pelikan'
-rpc_perf = '/home/users/u6632448/rpc-perf'
+pelikan = '/home/users/u6632448/pelikan' # TODO
+rpc_perf = '/home/users/u6632448/rpc-perf' # TODO
 cache_binary = pelikan+"/"+'target/release/pelikan_segcache_rs'
 config = pelikan+"/"+'config/segcache_perf_analysis.toml'
 trace = 'benchmarks/cluster052.zst'
