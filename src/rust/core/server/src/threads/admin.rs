@@ -314,6 +314,7 @@ impl Admin {
 
         // run in a loop, accepting new sessions and events on existing sessions
         while self.no_shutdown_received { // TODO change to while
+
             ADMIN_EVENT_LOOP.increment();
 
             if self.poll.poll(&mut events, self.timeout).is_err() {
@@ -464,6 +465,7 @@ impl EventLoop for Admin {
                                 let _ = session.write(b"OK\r\n");
                                 session.finalize_response();
                                 ADMIN_RESPONSE_COMPOSE.increment();
+                                self.no_shutdown_received = false; // MAY CAUSE PROBLEMS, NO "OK" PRINT
                             }
                             AdminRequest::Stats => {
                                 Self::handle_stats_request(session);
