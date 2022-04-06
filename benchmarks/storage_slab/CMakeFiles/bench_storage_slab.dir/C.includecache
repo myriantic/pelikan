@@ -1,0 +1,16 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/users/u6688826/pelikan/benchmarks/storage_slab/storage_slab.c
+bench_storage.h
+-
+storage/slab/item.h
+-
+storage/slab/slab.h
+-
+

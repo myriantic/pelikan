@@ -1,0 +1,2 @@
+/usr/bin/ar qc libbench_storage_slab.a  CMakeFiles/bench_storage_slab.dir/storage_slab.o
+/usr/bin/ranlib libbench_storage_slab.a

@@ -1,0 +1,2 @@
+/usr/bin/ar qc libbench_storage_cuckoo.a  CMakeFiles/bench_storage_cuckoo.dir/storage_cuckoo.o
+/usr/bin/ranlib libbench_storage_cuckoo.a

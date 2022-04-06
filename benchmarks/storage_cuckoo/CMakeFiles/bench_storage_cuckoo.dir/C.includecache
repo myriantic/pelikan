@@ -1,0 +1,16 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/users/u6688826/pelikan/benchmarks/storage_cuckoo/storage_cuckoo.c
+bench_storage.h
+-
+storage/cuckoo/item.h
+-
+storage/cuckoo/cuckoo.h
+-
+

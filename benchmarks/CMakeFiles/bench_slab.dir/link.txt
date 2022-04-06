@@ -1,0 +1,1 @@
+/usr/bin/cc   -rdynamic CMakeFiles/bench_slab.dir/bench_storage.o  -o bench_slab   -L/home/users/u6688826/pelikan/benchmarks/storage_slab  storage_slab/libbench_storage_slab.a -lslab -ltime -lccommon-static 

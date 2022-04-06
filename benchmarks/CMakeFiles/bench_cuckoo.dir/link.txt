@@ -1,0 +1,1 @@
+/usr/bin/cc   -rdynamic CMakeFiles/bench_cuckoo.dir/bench_storage.o  -o bench_cuckoo   -L/home/users/u6688826/pelikan/benchmarks/storage_cuckoo  storage_cuckoo/libbench_storage_cuckoo.a -lcuckoo -ltime -lccommon-static 
