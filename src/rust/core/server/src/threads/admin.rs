@@ -26,6 +26,7 @@ use std::io::{BufRead, Write};
 use std::io::{Error, ErrorKind};
 use std::net::SocketAddr;
 use std::time::Duration;
+use std::{thread, time};
 
 static_metrics! {
     static ADMIN_REQUEST_PARSE: Counter;
@@ -73,6 +74,7 @@ pub struct Admin {
     parser: AdminRequestParser,
     log_drain: Box<dyn Drain>,
     no_shutdown_received: bool,
+    stop_done: bool,
 }
 
 impl Drop for Admin {
@@ -128,6 +130,8 @@ impl Admin {
         let signal_queue = QueuePairs::new(Some(poll.waker()));
 
         let no_shutdown_received = true;
+        
+        let stop_done = true;
 
         Ok(Self {
             addr,
@@ -139,6 +143,7 @@ impl Admin {
             parser: AdminRequestParser::new(),
             log_drain,
             no_shutdown_received,
+            stop_done,
         })
     }
 
@@ -333,6 +338,7 @@ impl Admin {
                         // check if we have received signals from any sibling
                         // thread
                         #[allow(clippy::never_loop)]
+                        
                         while let Ok(signal) = self.signal_queue.recv_from(0) {
                             match signal {
                                 Signal::Shutdown => {
@@ -350,6 +356,7 @@ impl Admin {
                                 Signal::Stop => {
                                     warn!("received stop");
                                     let _ = self.log_drain.flush();
+                                    // self.stop_done = true;
                                     return;
                                 }
                             }
@@ -465,6 +472,7 @@ impl EventLoop for Admin {
                                 let _ = session.write(b"OK\r\n");
                                 session.finalize_response();
                                 ADMIN_RESPONSE_COMPOSE.increment();
+
                                 self.no_shutdown_received = false; // MAY CAUSE PROBLEMS, NO "OK" PRINT
                             }
                             AdminRequest::Stats => {
