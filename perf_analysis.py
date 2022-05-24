@@ -2,8 +2,6 @@
 # inspiration: https://stackoverflow.com/questions/39258616/running-two-process-simultaneously
 # USAGE: python3 performance_anaylysis.py
 
-# TODO: figure out how to measure recovery/copy time
-
 import os
 import multiprocessing
 import time
@@ -11,16 +9,25 @@ import signal
 import subprocess
 import telnetlib
 
+import warnings
+warnings.filterwarnings("ignore")
 
-pelikan = '/home/users/u6688826/pelikan' 
-rpc_perf = '/home/users/u6688826/rpc-perf'
+# Directories
+home = '/home/users/u6688826/'
+pelikan = home + '/pelikan' 
+rpc_perf = home + '/rpc-perf'
 cache_binary = pelikan+"/"+'target/release/pelikan_segcache_rs'
 config_folder = pelikan + "/config/perf_analysis_configs/"
 
-trace = 'benchmarks/cluster052.zst'
-replay_command = 'cargo run --release --bin rpc-replay -- --poolsize 100 --workers 4 --speed 1.0 --binary-trace --endpoint localhost:12321 --trace '+trace
+# Traces
+trace_1 = 'benchmarks/cluster052.zst'
+trace_2 = 'benchmarks/cluster052.zst'
+
+# Commands
+replay_command = 'cargo run --release --bin rpc-replay -- --poolsize 100 --workers 4 --speed 1.0 --binary-trace --endpoint localhost:12321 --trace '+ trace_1
 admin_command = 'telnet localhost 9999'
 
+# Parameters
 HOST = "localhost"
 PORT = 9999
 command = "stop"
@@ -28,33 +35,30 @@ command = "stop"
 for config in os.listdir(config_folder):
 
     config_path = config_folder + config
-    print(config_path)
+
+    ### Iteration 1 ###
 
     # -------- Spawn Segcache as a non-blocking process ------------------------
+    print("Running Iteration 1:")
+
     cache_spawn = subprocess.Popen([cache_binary,config_path])
-    # One idea for measuring copying is if you have a println!() in the segcache code, we should see it somewhere.
-    # Somehow monitor for it
 
     # -------- Replay the trace on the cache as a blocking process -------------
     os.chdir(rpc_perf)
-    replay_start = time.time()
+    # replay_start = time.time()
 
     # This sends cache requests to the server port
     replay = subprocess.Popen(replay_command.split())
     replay.wait()
-    replay_time = time.time() - replay_start
+    # replay_time = time.time() - replay_start
 
-    # ------- Send stop signal to admin port -----------------------------------
-    # gracefully shutsdown cache if configured to do so
-    shutdown_start = time.time() # move this down maybe
+    # Open Admin Connection
     admin_conn = telnetlib.Telnet(HOST, PORT)
     admin_conn.set_debuglevel(2)
 
-    # Main Test Cases Go here
-
-
-
-    # -----------------------
+    # ------- Send stop signal to admin port -----------------------------------
+    # gracefully shutsdown cache if configured to do so
+    # shutdown_start = time.time() # move this down maybe
 
     # Tells admin to terminate
     admin_conn.write(command.encode("ascii") + b"\r\n")
@@ -69,12 +73,77 @@ for config in os.listdir(config_folder):
             print("Admin Thread Closed")
             break
 
+    # shutdown_time = time.time() - shutdown_start
+
+    ### Iteration 2 ###
+
+    print("Running Iteration 2:")
+
+    os.chdir(home)
+
+    # -------- Spawn Segcache as a non-blocking process ------------------------
+
+    cache_spawn = subprocess.Popen([cache_binary,config_path])
+    # One idea for measuring copying is if you have a println!() in the segcache code, we should see it somewhere.
+    # Somehow monitor for it
+
+    # -------- Replay the trace on the cache as a blocking process -------------
+    os.chdir(rpc_perf)
+    replay_start = time.time()
+
+    # This sends cache requests to the server port
+    replay = subprocess.Popen(replay_command.split())
+    replay.wait()
+    replay_time = time.time() - replay_start
+
+    # Open Admin 
+    admin_conn = telnetlib.Telnet(HOST, PORT)
+    admin_conn.set_debuglevel(2)
+
+    # --- TESTS GOES HERE --- 
+
+    admin_conn.write("stats".encode("ascii") + b"\r\n")
+
+    # Waits for admin to terminate
+    while True:
+
+        try:
+            admin_conn.read_until(b"END")
+
+        except EOFError as _:
+            print("Admin Thread Closed")
+            break
+
+    # -----------------------
+
+    # ------- Send stop signal to admin port -----------------------------------
+    # gracefully shutsdown cache if configured to do so
+    # shutdown_start = time.time() # move this down maybe
+
+    # Tells admin to terminate
+    admin_conn.write(command.encode("ascii") + b"\r\n")
+
+    # Waits for admin to terminate
+    while True:
+
+        try:
+            admin_conn.read_until(b"Connection closed by")
+
+        except EOFError as _:
+            print("Admin Thread Closed")
+            break
+
+    # shutdown_time = time.time() - shutdown_start
+
+    # cache_spawn = subprocess.Popen([cache_binary,config_path])
+
     # ------ Manually terminate the cache --------------------------------------
     # note - all but 1 threads are terminated. 
     # So we need to manually terminate the cache.
     # cache_spawn.kill()
 
-    shutdown_time = time.time() - shutdown_start
     # ------ Statistics --------------------------------------------------------
     print("Time to   replay the cache: {}".format(replay_time))
-    print("Time to shutdown the cache: {}".format(shutdown_time))
+    # print("Time to shutdown the cache: {}".format(shutdown_time))
+
+    # ------ Write to File Here -------
