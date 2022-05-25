@@ -9,6 +9,7 @@ import signal
 import subprocess
 import telnetlib
 
+# Ignore Warnings
 import warnings
 warnings.filterwarnings("ignore")
 
@@ -18,19 +19,25 @@ pelikan = home + '/pelikan'
 rpc_perf = home + '/rpc-perf'
 cache_binary = pelikan+"/"+'target/release/pelikan_segcache_rs'
 config_folder = pelikan + "/config/perf_analysis_configs/"
+output_file = f"{config_folder}/perf_output.txt"
 
 # Traces
 trace_1 = 'benchmarks/cluster052.zst'
 trace_2 = 'benchmarks/cluster052.zst'
 
 # Commands
-replay_command = 'cargo run --release --bin rpc-replay -- --poolsize 100 --workers 4 --speed 1.0 --binary-trace --endpoint localhost:12321 --trace '+ trace_1
+replay_command_1 = 'cargo run --release --bin rpc-replay -- --speed 1.0 --poolsize 100 --workers 4 --binary-trace --endpoint localhost:12321 --trace ' + trace_1
+replay_command_2 = 'cargo run --release --bin rpc-replay -- --speed 1.0 --poolsize 100 --workers 4 --binary-trace --endpoint localhost:12321 --trace ' + trace_2
+
 admin_command = 'telnet localhost 9999'
+
+# print(replay_command)
 
 # Parameters
 HOST = "localhost"
 PORT = 9999
-command = "stop"
+stop  = "stop".encode("ascii") + b"\r\n"
+stats = "stats".encode("ascii") + b"\r\n"
 
 for config in os.listdir(config_folder):
 
@@ -48,7 +55,7 @@ for config in os.listdir(config_folder):
     # replay_start = time.time()
 
     # This sends cache requests to the server port
-    replay = subprocess.Popen(replay_command.split())
+    replay = subprocess.Popen(replay_command_1.split())
     replay.wait()
     # replay_time = time.time() - replay_start
 
@@ -61,7 +68,7 @@ for config in os.listdir(config_folder):
     # shutdown_start = time.time() # move this down maybe
 
     # Tells admin to terminate
-    admin_conn.write(command.encode("ascii") + b"\r\n")
+    admin_conn.write(stop)
 
     # Waits for admin to terminate
     while True:
@@ -92,7 +99,7 @@ for config in os.listdir(config_folder):
     replay_start = time.time()
 
     # This sends cache requests to the server port
-    replay = subprocess.Popen(replay_command.split())
+    replay = subprocess.Popen(replay_command_2.split())
     replay.wait()
     replay_time = time.time() - replay_start
 
@@ -102,17 +109,16 @@ for config in os.listdir(config_folder):
 
     # --- TESTS GOES HERE --- 
 
-    admin_conn.write("stats".encode("ascii") + b"\r\n")
+    # Requests Stats
+    admin_conn.write(stats)
 
-    # Waits for admin to terminate
-    while True:
+    # Get Stats, Read until "END"
+    output = admin_conn.read_until("write 0\r\nEND\r\n".encode("ascii"))
 
-        try:
-            admin_conn.read_until(b"END")
-
-        except EOFError as _:
-            print("Admin Thread Closed")
-            break
+    # Write Stats to File
+    output_file = open(output_file, "w")
+    output_file.write(output.decode("ascii"))
+    output_file.close()
 
     # -----------------------
 
@@ -121,7 +127,7 @@ for config in os.listdir(config_folder):
     # shutdown_start = time.time() # move this down maybe
 
     # Tells admin to terminate
-    admin_conn.write(command.encode("ascii") + b"\r\n")
+    admin_conn.write(stop)
 
     # Waits for admin to terminate
     while True:
@@ -134,8 +140,6 @@ for config in os.listdir(config_folder):
             break
 
     # shutdown_time = time.time() - shutdown_start
-
-    # cache_spawn = subprocess.Popen([cache_binary,config_path])
 
     # ------ Manually terminate the cache --------------------------------------
     # note - all but 1 threads are terminated. 
