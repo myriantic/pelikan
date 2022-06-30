@@ -36,7 +36,7 @@ admin_command = 'telnet localhost 9999'
 # Parameters
 HOST = "localhost"
 PORT = 9999
-stop  = "stop".encode("ascii") + b"\r\n"
+stop  =  "stop".encode("ascii") + b"\r\n"
 stats = "stats".encode("ascii") + b"\r\n"
 
 for config in os.listdir(config_folder):
