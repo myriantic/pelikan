@@ -50,6 +50,8 @@ metadata_path = "/home/users/u6688826/file_for_metadata"
 restore = false
 # state whether cache will be flushed upon shutdown
 graceful_shutdown = true
+datapool_pmem = true
+metadata_pmem = true
 
 [time]
 time_type = "Memcache"

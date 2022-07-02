@@ -18,7 +18,8 @@ home = '/home/users/u6688826'
 pelikan = home + '/pelikan' 
 rpc_perf = home + '/rpc-perf'
 cache_binary  = pelikan + "/target/release/pelikan_segcache_rs"
-config_folder = pelikan + "/config/perf_analysis_configs"
+# config_folder = pelikan + "/config/perf_analysis_configs"
+config_folder = pelikan + "/config/choice_config"
 output_folder = pelikan + "/outputs"
 
 # Traces

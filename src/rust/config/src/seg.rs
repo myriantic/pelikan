@@ -34,6 +34,12 @@ const DATAPOOL_PATH: Option<&str> = None;
 // hashtable
 const HASHTABLE_PATH: Option<&str> = None;
 
+// datapool (`Segments.data`)
+const DATAPOOL_PMEM: bool = false;
+
+// hashtable
+const HASHTABLE_PMEM: bool = false;
+
 #[derive(Copy, Clone, Debug, Serialize, Deserialize)]
 pub enum Eviction {
     None,
@@ -94,6 +100,14 @@ fn metadata_path() -> Option<String> {
     HASHTABLE_PATH.map(|v| v.to_string())
 }
 
+fn datapool_pmem() -> bool {
+    DATAPOOL_PMEM
+}
+
+fn metadata_pmem() -> bool {
+    HASHTABLE_PMEM
+}
+
 // definitions
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Seg {
@@ -121,6 +135,10 @@ pub struct Seg {
     datapool_path: Option<String>,
     #[serde(default = "metadata_path")]
     metadata_path: Option<String>,
+    #[serde(default = "datapool_pmem")]
+    datapool_pmem: bool,
+    #[serde(default = "metadata_pmem")]
+    metadata_pmem: bool,
 }
 
 impl Default for Seg {
@@ -138,6 +156,8 @@ impl Default for Seg {
             compact_target: compact_target(),
             datapool_path: datapool_path(),
             metadata_path: metadata_path(),
+            datapool_pmem: datapool_pmem(),
+            metadata_pmem: metadata_pmem(),
         }
     }
 }
@@ -197,6 +217,12 @@ impl Seg {
 
     pub fn metadata_path(&self) -> Option<PathBuf> {
         self.metadata_path.as_ref().map(|v| Path::new(v).to_owned())
+    }
+    pub fn datapool_pmem(&self) -> bool {
+        self.datapool_pmem
+    }
+    pub fn metadata_pmem(&self) -> bool {
+        self.metadata_pmem
     }
 }
 
