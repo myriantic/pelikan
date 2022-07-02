@@ -14,12 +14,12 @@ import warnings
 warnings.filterwarnings("ignore")
 
 # Directories
-home = '/home/users/u6688826/'
+home = '/home/users/u6688826'
 pelikan = home + '/pelikan' 
 rpc_perf = home + '/rpc-perf'
-cache_binary = pelikan+"/"+'target/release/pelikan_segcache_rs'
-config_folder = pelikan + "/config/perf_analysis_configs/"
-output_file = f"{config_folder}/perf_output.txt"
+cache_binary  = pelikan + "/target/release/pelikan_segcache_rs"
+config_folder = pelikan + "/config/perf_analysis_configs"
+output_folder = pelikan + "/outputs"
 
 # Traces
 trace_1 = 'benchmarks/cluster052.zst'
@@ -41,7 +41,9 @@ stats = "stats".encode("ascii") + b"\r\n"
 
 for config in os.listdir(config_folder):
 
-    config_path = config_folder + config
+    config_path = config_folder + "/" + config
+
+    output_file = f"{output_folder}/{config}_output.txt"
 
     ### Iteration 1 ###
 
