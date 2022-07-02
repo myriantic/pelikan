@@ -246,6 +246,8 @@ impl Builder {
                         ttl_buckets,
                         metadata_path: self.metadata_path,
                         graceful_shutdown: self.graceful_shutdown,
+                        metadata_pmem: self.graceful_shutdown,
+                        datapool_pmem: self.graceful_shutdown,
                     };
                 }
             }
@@ -262,6 +264,8 @@ impl Builder {
             ttl_buckets,
             metadata_path: self.metadata_path,
             graceful_shutdown: self.graceful_shutdown,
+            metadata_pmem: self.graceful_shutdown,
+            datapool_pmem: self.graceful_shutdown,
         }
     }
 }

@@ -77,7 +77,7 @@ STAT log_skip 0
 STAT log_write 0
 STAT log_write_byte 0
 STAT log_write_ex 0
-STAT pid 906260
+STAT pid 908544
 STAT ping 0
 STAT pipeline_depth_p25 0
 STAT pipeline_depth_p50 0
@@ -107,17 +107,17 @@ STAT ru_inblock 0
 STAT ru_isrss 0
 STAT ru_ixrss 0
 STAT ru_majflt 0
-STAT ru_maxrss 24252416
-STAT ru_minflt 5025
+STAT ru_maxrss 24240128
+STAT ru_minflt 5017
 STAT ru_msgrcv 0
 STAT ru_msgsnd 0
-STAT ru_nivcsw 2
+STAT ru_nivcsw 0
 STAT ru_nsignals 0
 STAT ru_nswap 0
-STAT ru_nvcsw 459
+STAT ru_nvcsw 461
 STAT ru_oublock 0
-STAT ru_stime 19830000
-STAT ru_utime 12007000
+STAT ru_stime 25054000
+STAT ru_utime 5598000
 STAT segment_clear 0
 STAT segment_current 32
 STAT segment_evict 0
@@ -130,7 +130,7 @@ STAT segment_request_failure 0
 STAT segment_request_success 0
 STAT segment_return 0
 STAT server_event_error 0
-STAT server_event_loop 419
+STAT server_event_loop 420
 STAT server_event_read 0
 STAT server_event_total 400
 STAT server_event_write 0
@@ -161,8 +161,8 @@ STAT tcp_recv_byte 7
 STAT tcp_send_byte 0
 STAT tcp_send_partial 0
 STAT worker_event_error 0
-STAT worker_event_loop 421
-STAT worker_event_read 198
-STAT worker_event_total 799
+STAT worker_event_loop 420
+STAT worker_event_read 185
+STAT worker_event_total 751
 STAT worker_event_write 0
 END

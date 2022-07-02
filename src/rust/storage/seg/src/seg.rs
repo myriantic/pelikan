@@ -12,6 +12,8 @@ use std::path::PathBuf;
 
 use metrics::{static_metrics, Counter};
 
+use std::io::{self, Write};
+
 const RESERVE_RETRIES: usize = 3;
 
 static_metrics! {
@@ -33,6 +35,8 @@ pub struct Seg {
     pub(crate) metadata_path: Option<PathBuf>,
     // Will the cache be gracefully shutdown?
     pub(crate) graceful_shutdown: bool,
+    pub(crate) datapool_pmem: bool,
+    pub(crate) metadata_pmem: bool,
 }
 
 impl Seg {
@@ -60,6 +64,16 @@ impl Seg {
     /// (if it exists) and flushing `Segments.data` (if it is file backed)
     pub fn flush(&self) -> std::io::Result<()> {
         if self.graceful_shutdown {
+
+            if self.metadata_pmem {
+                // Write to metadata_pmem here
+            }
+
+            if self.datapool_pmem {
+                // Write to datapool_pmem here
+            }
+
+            // move into meta_data if statement
             if let Some(file) = &self.metadata_path {
                 let file_size = self.hashtable.recover_size()
                     + self.ttl_buckets.recover_size()
