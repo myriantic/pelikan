@@ -67,11 +67,22 @@ impl Seg {
 
             if self.metadata_pmem {
                 // Write to metadata_pmem here
+                return Err(std::io::Error::new(
+                    std::io::ErrorKind::Other,
+                    "test",
+                ))
             }
 
             if self.datapool_pmem {
                 // Write to datapool_pmem here
             }
+
+            println!("test2");
+
+            return Err(std::io::Error::new(
+                std::io::ErrorKind::Other,
+                "test5",
+            ))
 
             // move into meta_data if statement
             if let Some(file) = &self.metadata_path {
