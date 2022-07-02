@@ -44,6 +44,7 @@ impl Seg {
         // build the datastructure from the config
         let data = ::seg::Seg::builder()
             .restore(config.restore())
+            .graceful_shutdown(config.graceful_shutdown())
             .hash_power(config.hash_power())
             .overflow_factor(config.overflow_factor())
             .heap_size(config.heap_size())
@@ -51,7 +52,8 @@ impl Seg {
             .eviction(eviction)
             .datapool_path(config.datapool_path())
             .metadata_path(config.metadata_path())
-            .graceful_shutdown(config.graceful_shutdown())
+            // .datapool_pmem(config.datapool_pmem())
+            // .metadata_pmem(config.metadata_pmem())
             .build();
 
         Self { data }

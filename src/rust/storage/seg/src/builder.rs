@@ -17,6 +17,8 @@ pub struct Builder {
     segments_builder: SegmentsBuilder,
     metadata_path: Option<PathBuf>,
     graceful_shutdown: bool,
+    datapool_pmem: bool,
+    metadata_pmem: bool,
 }
 
 // Defines the default parameters
@@ -29,6 +31,8 @@ impl Default for Builder {
             segments_builder: SegmentsBuilder::default(),
             metadata_path: None,
             graceful_shutdown: false,
+            datapool_pmem: false,
+            metadata_pmem: false,
         }
     }
 }
@@ -168,6 +172,22 @@ impl Builder {
     /// with path `metadata_path`
     pub fn graceful_shutdown(mut self, graceful_shutdown: bool) -> Self {
         self.graceful_shutdown = graceful_shutdown;
+        self
+    }
+
+    /// Specify whether the cache will be gracefully shutdown. If `true`, then
+    /// when the cache is flushed, the relevant parts will be stored to the file
+    /// with path `metadata_path`
+    pub fn datapool_pmem(mut self, datapool_pmem: bool) -> Self {
+        self.datapool_pmem = datapool_pmem;
+        self
+    }
+
+    /// Specify whether the cache will be gracefully shutdown. If `true`, then
+    /// when the cache is flushed, the relevant parts will be stored to the file
+    /// with path `metadata_path`
+    pub fn metadata_pmem(mut self, metadata_pmem: bool) -> Self {
+        self.metadata_pmem = metadata_pmem;
         self
     }
 
