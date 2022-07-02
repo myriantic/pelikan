@@ -52,8 +52,8 @@ impl Seg {
             .eviction(eviction)
             .datapool_path(config.datapool_path())
             .metadata_path(config.metadata_path())
-            // .datapool_pmem(config.datapool_pmem())
-            // .metadata_pmem(config.metadata_pmem())
+            .datapool_pmem(config.datapool_pmem())
+            .metadata_pmem(config.metadata_pmem())
             .build();
 
         Self { data }
