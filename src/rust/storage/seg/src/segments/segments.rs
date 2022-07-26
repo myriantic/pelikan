@@ -75,14 +75,23 @@ impl Segments {
 
         let heap_size = segments * segment_size as usize;
 
-        // TODO(bmartin): we always prefault, this should be configurable
-        let mut data: Box<dyn Datapool> = if let Some(file) = builder.datapool_path {
-            let pool = File::create(file, heap_size, true)
-                .expect("failed to allocate file backed storage");
-            Box::new(pool)
-        } else {
-            Box::new(Memory::create(heap_size, true))
-        };
+        // // TODO(bmartin): we always prefault, this should be configurable
+        // let mut data: Box<dyn Datapool> = if let Some(file) = builder.datapool_path {
+        //     let pool = File::create(file, heap_size, true)
+        //         .expect("failed to allocate file backed storage");
+        //     Box::new(pool)
+        // } else {
+        //     Box::new(Memory::create(heap_size, true))
+        // };
+
+        // Always run in DRAM
+        let mut data: Box<dyn Datapool> = Box::new(Memory::create(heap_size, true));
+
+        if let Some(file) = builder.datapool_path {
+                let pool = File::create(file, heap_size, true)
+                    .expect("failed to allocate file backed storage");
+                Box::new(pool)
+            }
 
         for idx in 0..segments {
             let begin = segment_size as usize * idx;
