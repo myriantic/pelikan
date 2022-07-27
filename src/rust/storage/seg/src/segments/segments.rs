@@ -45,6 +45,9 @@ pub(crate) struct Segments {
     data_file_backed: bool,
     ///  Are `headers` copied back from a file?
     pub(crate) fields_copied_back: bool,
+
+    // size of segment data
+    data_size: usize,
 }
 
 impl Segments {
@@ -80,6 +83,8 @@ impl Segments {
         let heap_size = cfg_segments * cfg_segment_size as usize;
         let mut data_file_backed = false;
         let mut data_on_existing_file = false;
+
+        let mut data_size = heap_size;
 
         // TODO(bmartin): we always prefault, this should be configurable
         let mut data: Box<dyn Datapool> = if let Some(file) = builder.datapool_path {
@@ -180,6 +185,7 @@ impl Segments {
                     evict: Box::new(evict),
                     data_file_backed: true,
                     fields_copied_back: true,
+                    data_size,
                 };
             }
         }
@@ -222,16 +228,33 @@ impl Segments {
             evict: Box::new(evict),
             data_file_backed,
             fields_copied_back: false,
+            data_size,
         }
     }
 
-    /// Flushes the `Segments` by flushing the `Segments.data` (if filed backed)
-    /// and copying the other `Segments` fields' by copying it to `metadata`
-    pub fn flush(&self, metadata: &mut [u8]) -> std::io::Result<()> {
-        // if `Segments.data` is file backed, flush it to file
+    pub fn flush_data(&self, datapool: &mut [u8]) -> std::io::Result<()> {
+        // if self.data_file_backed {
+        //     self.data.flush()?;
+        // }
+
         if self.data_file_backed {
             self.data.flush()?;
         }
+
+        let mut offset = 0;
+
+        // Get Box Pointer
+        let byte_ptr = Box::into_raw(self.clone().data);
+
+        // Get Data Size
+        let data_size = self.file_size();
+        // store::store_bytes_and_update_offset(byte_ptr, offset, data_size, datapool);
+        Ok(())
+    }
+    /// Flushes the `Segments` by flushing the `Segments.data` (if filed backed)
+    /// and copying the other `Segments` fields' by copying it to `metadata`
+    pub fn flush_meta(&self, metadata: &mut [u8]) -> std::io::Result<()> {
+        // if `Segments.data` is file backed, flush it to file
 
         let header_size: usize = ::std::mem::size_of::<SegmentHeader>();
         let i32_size = ::std::mem::size_of::<i32>();
@@ -1124,6 +1147,11 @@ impl Segments {
                             + free_q_size
                             + flush_at_size
     }
+
+    pub fn file_size(&self) -> usize {
+        // return self.data_size;
+        return 0;
+    }
 }
 
 impl Default for Segments {
@@ -1167,6 +1195,7 @@ impl Clone for Segments {
             evict: self.evict.clone(),                   // not relevant
             data_file_backed: self.data_file_backed,     // not relevant
             fields_copied_back: self.fields_copied_back, // not relevant
+            data_size: self.data_size,
         }
     }
 }

@@ -16,6 +16,7 @@ pub struct Builder {
     overflow_factor: f64,
     segments_builder: SegmentsBuilder,
     metadata_path: Option<PathBuf>,
+    datapool_path: Option<PathBuf>,
     graceful_shutdown: bool,
 }
 
@@ -28,6 +29,7 @@ impl Default for Builder {
             overflow_factor: 0.0,
             segments_builder: SegmentsBuilder::default(),
             metadata_path: None,
+            datapool_path: None,
             graceful_shutdown: false,
         }
     }
@@ -153,6 +155,7 @@ impl Builder {
 
     /// Specify a backing file to be used for `Segments.data` storage.
     pub fn datapool_path<T: AsRef<Path>>(mut self, path: Option<T>) -> Self {
+        self.datapool_path = path.as_ref().map(|p| p.as_ref().to_owned());
         self.segments_builder = self.segments_builder.datapool_path(path);
         self
     }
@@ -225,6 +228,7 @@ impl Builder {
                         segments,
                         ttl_buckets,
                         metadata_path: self.metadata_path,
+                        datapool_path: self.datapool_path,
                         graceful_shutdown: self.graceful_shutdown,
                     };
                 }
@@ -241,6 +245,7 @@ impl Builder {
             segments,
             ttl_buckets,
             metadata_path: self.metadata_path,
+            datapool_path: self.datapool_path,
             graceful_shutdown: self.graceful_shutdown,
         }
     }

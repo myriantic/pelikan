@@ -31,6 +31,8 @@ pub struct Seg {
     pub(crate) ttl_buckets: TtlBuckets,
     // Path to metadata datapool
     pub(crate) metadata_path: Option<PathBuf>,
+    // Path to datapool
+    pub(crate) datapool_path: Option<PathBuf>,
     // Will the cache be gracefully shutdown?
     pub(crate) graceful_shutdown: bool,
 }
@@ -60,6 +62,22 @@ impl Seg {
     /// (if it exists) and flushing `Segments.data` (if it is file backed)
     pub fn flush(&self) -> std::io::Result<()> {
         if self.graceful_shutdown {
+
+            // Backup Datapool from DRAM to PMEM
+            if let Some(file) = &self.datapool_path {
+
+                let file_size = self.segments.file_size();
+
+                // Mmap file
+                let mut pool = File::create(file, file_size, true)
+                    .expect("failed to allocate file backed storage");
+                let datapool = pool.as_mut_slice();
+
+                // self.segments.flush_data(datapool[offset..])?;
+
+            }
+
+            // Backup Metadata from DRAM to PMEM
             if let Some(file) = &self.metadata_path {
                 let file_size = self.hashtable.recover_size()
                     + self.ttl_buckets.recover_size()
@@ -74,12 +92,13 @@ impl Seg {
                 let mut offset = self.hashtable.recover_size();
                 self.ttl_buckets.flush(&mut metadata[offset..]);
                 offset += self.ttl_buckets.recover_size();
-                self.segments.flush(&mut metadata[offset..])?;
+                self.segments.flush_meta(&mut metadata[offset..])?;
 
                 // TODO: check if this flushes the CPU caches
                 pool.flush()?;
                 return Ok(());
             }
+            // return Ok(());
         }
 
         Err(std::io::Error::new(
