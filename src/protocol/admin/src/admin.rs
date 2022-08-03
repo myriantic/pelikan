@@ -51,7 +51,6 @@ impl Parse<AdminRequest> for AdminRequestParser {
                     _ => Err(ParseError::Unknown),
                 }
             } else {
-<<<<<<< HEAD:src/rust/protocol/src/admin.rs
                 match &buffer[0..command_end] {
                     b"flush_all" => Ok(ParseOk {
                         message: AdminRequest::FlushAll,
@@ -74,20 +73,6 @@ impl Parse<AdminRequest> for AdminRequestParser {
                         consumed: command_end + CRLF.len(),
                     }),
                     _ => Err(ParseError::UnknownCommand),
-=======
-                match &trimmed_buffer[0..] {
-                    b"flush_all" => Ok(ParseOk::new(
-                        AdminRequest::FlushAll,
-                        command_end + CRLF.len(),
-                    )),
-                    b"stats" => Ok(ParseOk::new(AdminRequest::Stats, command_end + CRLF.len())),
-                    b"quit" => Ok(ParseOk::new(AdminRequest::Quit, command_end + CRLF.len())),
-                    b"version" => Ok(ParseOk::new(
-                        AdminRequest::Version,
-                        command_end + CRLF.len(),
-                    )),
-                    _ => Err(ParseError::Unknown),
->>>>>>> upstream/master:src/protocol/admin/src/admin.rs
                 }
             }
         } else {

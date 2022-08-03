@@ -254,7 +254,9 @@ impl Segments {
         SEGMENT_CURRENT.set(cfg_segments as _);
         SEGMENT_FREE.set(cfg_segments as _);
 
-        Ok(Self {
+        Ok();
+        
+        Self {
             headers,
             segment_size: cfg_segment_size,
             cap: cfg_segments as u32,

@@ -4,11 +4,9 @@
 
 //! Core datastructure
 
-use crate::datapool::*;
 use crate::Value;
 use crate::*;
 use std::cmp::min;
-use std::path::PathBuf;
 
 const RESERVE_RETRIES: usize = 3;
 
@@ -31,16 +29,12 @@ pub struct Seg {
     pub(crate) hashtable: HashTable,
     pub(crate) segments: Segments,
     pub(crate) ttl_buckets: TtlBuckets,
-<<<<<<< HEAD:src/rust/storage/seg/src/seg.rs
     // Path to metadata datapool
     pub(crate) metadata_path: Option<PathBuf>,
     // Path to datapool
     pub(crate) datapool_path: Option<PathBuf>,
     // Will the cache be gracefully shutdown?
     pub(crate) graceful_shutdown: bool,
-=======
-    pub(crate) time: Instant,
->>>>>>> upstream/master:src/storage/seg/src/seg.rs
 }
 
 impl Seg {

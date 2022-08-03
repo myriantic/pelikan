@@ -4,7 +4,7 @@
 
 //! A builder for configuring a new [`Seg`] instance.
 
-use crate::datapool::*;
+// use crate::datapool::*;
 use crate::*;
 use std::path::Path;
 use std::path::PathBuf;
@@ -192,7 +192,6 @@ impl Builder {
     ///     .hash_power(16)
     ///     .eviction(Policy::Random).build();
     /// ```
-<<<<<<< HEAD:src/rust/storage/seg/src/builder.rs
     pub fn build(self) -> Seg {
         // If `restore` and there is a path for the metadata file to
         // restore from, restore the cache
@@ -240,25 +239,16 @@ impl Builder {
         let hashtable = HashTable::new(self.hash_power, self.overflow_factor);
         let ttl_buckets = TtlBuckets::new();
         let segments = self.segments_builder.build(None);
-=======
-    pub fn build(self) -> Result<Seg, std::io::Error> {
-        let hashtable = HashTable::new(self.hash_power, self.overflow_factor);
-        let segments = self.segments_builder.build()?;
-        let ttl_buckets = TtlBuckets::default();
->>>>>>> upstream/master:src/storage/seg/src/builder.rs
 
-        Ok(Seg {
+        Ok();
+        
+        Seg {
             hashtable,
             segments,
             ttl_buckets,
-<<<<<<< HEAD:src/rust/storage/seg/src/builder.rs
             metadata_path: self.metadata_path,
             datapool_path: self.datapool_path,
             graceful_shutdown: self.graceful_shutdown,
         }
-=======
-            time: Instant::recent(),
-        })
->>>>>>> upstream/master:src/storage/seg/src/builder.rs
     }
 }

@@ -1,4 +1,4 @@
-use crate::datapool::*;
+use crate::*;
 
 /// Copies `size` bytes at `byte_ptr` to the `offset` of `data`
 /// Returns the next `offset`, that is, the next byte of `data` to be copied into
