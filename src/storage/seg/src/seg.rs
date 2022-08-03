@@ -4,7 +4,7 @@
 
 //! Core datastructure
 
-use crate::datapool::*;
+// use crate::datapool::*;
 use crate::Value;
 use crate::*;
 use std::cmp::min;
@@ -69,14 +69,14 @@ impl Seg {
             // Backup Datapool from DRAM to PMEM
             if let Some(file_data) = &self.datapool_path {
 
-                let heap_size = self.segments.heap_size();
+                // let heap_size = self.segments.heap_size();
 
-                // Mmap file (+100 to accomodate for Box Type for now)
-                let mut pool = File::create(file_data, heap_size, true)
-                    .expect("failed to allocate file backed storage");
+                // // Mmap file (+100 to accomodate for Box Type for now)
+                // let mut pool = File::create(file_data, heap_size, true)
+                //     .expect("failed to allocate file backed storage");
 
-                let datapool = pool.as_mut_slice();
-                self.segments.flush_data(datapool)?;
+                // let datapool = pool.as_mut_slice();
+                // self.segments.flush_data(datapool)?;
 
                 // pool.flush()?;
 
@@ -92,7 +92,7 @@ impl Seg {
                     + self.segments.recover_size();
 
                 // Mmap file
-                let mut pool = File::create(file_meta, file_size, true)
+                let mut pool = MmapFile::create(file_meta, file_size, true)
                     .expect("failed to allocate file backed storage");
                 let metadata = pool.as_mut_slice();
 

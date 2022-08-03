@@ -269,6 +269,135 @@ impl HashTable {
         }
     }
 
+    /// Flushes the `HashTable` by copying it to `metadata`
+    pub fn flush(&self, metadata: &mut [u8]) {
+        let total_buckets = total_buckets(self.power, self.overflow_factor);
+        let bucket_size = ::std::mem::size_of::<HashBucket>();
+        let u64_size = ::std::mem::size_of::<u64>();
+        let started_size = ::std::mem::size_of::<Instant>();
+
+        let mut offset = 0;
+        // --------------------- Store `power` -----------------
+
+        // cast `power` to byte pointer
+        let byte_ptr = (&self.power as *const u64) as *const u8;
+
+        // store `power` back to mmapped file
+        offset = store::store_bytes_and_update_offset(byte_ptr, offset, u64_size, metadata);
+
+        // --------------------- Store `mask` -----------------
+
+        // cast `mask` to byte pointer
+        let byte_ptr = (&self.mask as *const u64) as *const u8;
+
+        // store `mask` back to mmapped file
+        offset = store::store_bytes_and_update_offset(byte_ptr, offset, u64_size, metadata);
+        // --------------------- Store `data` -----------------
+
+        // for every `HashBucket`
+        for id in 0..total_buckets {
+            // cast `HashBucket` to byte pointer
+            let byte_ptr = (&self.data[id] as *const HashBucket) as *const u8;
+
+            // store `HashBucket` back to mmapped file
+            offset = store::store_bytes_and_update_offset(byte_ptr, offset, bucket_size, metadata);
+        }
+
+        // --------------------- Store `started` -----------------
+
+        // cast `started` to byte pointer
+        let byte_ptr = (&self.started as *const Instant) as *const u8;
+
+        // store `started` back to mmapped file
+        offset = store::store_bytes_and_update_offset(byte_ptr, offset, started_size, metadata);
+        // --------------------- Store `next_to_chain` -----------------
+
+        // cast `next_to_chain` to byte pointer
+        let byte_ptr = (&self.next_to_chain as *const u64) as *const u8;
+
+        // store `next_to_chain` back to mmapped file
+        store::store_bytes_and_update_offset(byte_ptr, offset, u64_size, metadata);
+        // -------------------------------------------------------------
+    }
+
+    // Returns a restored `HashTable` using recovery data (`metadata`)
+    pub fn restore(metadata: &[u8], cfg_power: u8, overflow_factor: f64) -> Self {
+        // restore() assumes no changes in `power`.
+        // I.e. config specifies same `power` as `HashTable` we are
+        // restoring from
+        // TODO: Detect a change of `power` and adjust `HashTable` accordingly
+        let total_buckets = total_buckets(cfg_power.into(), overflow_factor);
+        let bucket_size = ::std::mem::size_of::<HashBucket>();
+        let u64_size = ::std::mem::size_of::<u64>();
+        let started_size = ::std::mem::size_of::<Instant>();
+        // Size of all components of `HashTable` that are being restored
+        let hashtable_size = u64_size * 3 // `power`, `mask`, `next_to_chain`
+                               + total_buckets * bucket_size // `data`
+                               + started_size;
+
+        // create blank bytes to copy data into
+        let mut bytes = vec![0; hashtable_size];
+        // retrieve bytes from mmapped file
+        bytes.copy_from_slice(&metadata[0..hashtable_size]);
+
+        // ----- Re-initialise `hash_builder` -----
+
+        let hash_builder = hash_builder();
+
+        let mut offset = 0;
+        // ----- Retrieve `power` ---------
+        let mut end = u64_size;
+
+        let power = unsafe { *(bytes[offset..end].as_mut_ptr() as *mut u64) };
+        // TODO: compare `cfg_power` and `power`
+
+        offset += u64_size;
+        // ----- Retrieve `mask` ---------
+        end += u64_size;
+
+        let mask = unsafe { *(bytes[offset..end].as_mut_ptr() as *mut u64) };
+
+        offset += u64_size;
+        // ----- Retrieve `data` ---------
+
+        let mut data = Vec::with_capacity(0);
+        data.reserve_exact(total_buckets as usize);
+
+        // Get each `HashBucket` from the raw bytes
+        for _ in 0..total_buckets {
+            end += bucket_size;
+
+            // cast bytes to `HashBucket`
+            let bucket = unsafe { *(bytes[offset..end].as_mut_ptr() as *mut HashBucket) };
+            data.push(bucket);
+
+            offset += bucket_size;
+        }
+
+        // ----- Retrieve `started` ---------
+        end += started_size;
+
+        let started = unsafe { *(bytes[offset..end].as_mut_ptr() as *mut Instant) };
+
+        offset += started_size;
+        // ----- Retrieve `next_to_chain` ---------
+        end += u64_size;
+
+        let next_to_chain = unsafe { *(bytes[offset..end].as_mut_ptr() as *mut u64) };
+
+        Self {
+            hash_builder: Box::new(hash_builder),
+            power,
+            mask,
+            data: data.into_boxed_slice(),
+            rng: Box::new(rng()),
+            started,
+            next_to_chain,
+            _table_copied_back: true,
+            overflow_factor,
+        }
+    }
+
     /// Lookup an item by key and return it
     pub fn get(&mut self, key: &[u8], time: Instant, segments: &mut Segments) -> Option<Item> {
         let hash = self.hash(key);

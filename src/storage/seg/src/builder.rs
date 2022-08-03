@@ -4,7 +4,7 @@
 
 //! A builder for configuring a new [`Seg`] instance.
 
-use crate::datapool::*;
+// use crate::datapool::*;
 use crate::*;
 use std::path::Path;
 use std::path::PathBuf;
