@@ -61,30 +61,36 @@ impl Seg {
     /// of `Segments`, `HashTable` and `TtlBuckets` to the `metadata` file
     /// (if it exists) and flushing `Segments.data` (if it is file backed)
     pub fn flush(&self) -> std::io::Result<()> {
+
         if self.graceful_shutdown {
 
             // Backup Datapool from DRAM to PMEM
-            if let Some(file) = &self.datapool_path {
+            if let Some(file_data) = &self.datapool_path {
 
-                let file_size = self.segments.file_size();
+                let heap_size = self.segments.heap_size();
 
-                // Mmap file
-                let mut pool = File::create(file, file_size, true)
+                // Mmap file (+100 to accomodate for Box Type for now)
+                let mut pool = File::create(file_data, heap_size, true)
                     .expect("failed to allocate file backed storage");
-                let datapool = pool.as_mut_slice();
 
-                // self.segments.flush_data(datapool[offset..])?;
+                let datapool = pool.as_mut_slice();
+                self.segments.flush_data(datapool)?;
+
+                // pool.flush()?;
+
+                // return Ok(());
 
             }
 
             // Backup Metadata from DRAM to PMEM
-            if let Some(file) = &self.metadata_path {
+            if let Some(file_meta) = &self.metadata_path {
+
                 let file_size = self.hashtable.recover_size()
                     + self.ttl_buckets.recover_size()
                     + self.segments.recover_size();
 
                 // Mmap file
-                let mut pool = File::create(file, file_size, true)
+                let mut pool = File::create(file_meta, file_size, true)
                     .expect("failed to allocate file backed storage");
                 let metadata = pool.as_mut_slice();
 
@@ -97,8 +103,8 @@ impl Seg {
                 // TODO: check if this flushes the CPU caches
                 pool.flush()?;
                 return Ok(());
+                // let test_enter = true;
             }
-            // return Ok(());
         }
 
         Err(std::io::Error::new(

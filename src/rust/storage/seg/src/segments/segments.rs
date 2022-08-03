@@ -8,6 +8,9 @@ use crate::item::*;
 use crate::seg::{SEGMENT_REQUEST, SEGMENT_REQUEST_SUCCESS};
 use crate::segments::*;
 
+use crate::lib::{SEGMENT_REQUEST, SEGMENT_REQUEST_SUCCESS};
+
+
 use core::num::NonZeroU32;
 use metrics::{static_metrics, Counter, Gauge};
 
@@ -86,10 +89,13 @@ impl Segments {
 
         let mut data_size = heap_size;
 
+        let mut test_fbm =
+                FileBackedMemory::create(builder.datapool_path, 2 * 4096, 0).expect("failed to create pool");
         // TODO(bmartin): we always prefault, this should be configurable
         let mut data: Box<dyn Datapool> = if let Some(file) = builder.datapool_path {
             data_file_backed = true;
             data_on_existing_file = std::fs::metadata(&file).is_ok();
+
             let pool = File::create(file, heap_size, true)
                 .expect("failed to allocate file backed storage");
             Box::new(pool)
@@ -97,10 +103,42 @@ impl Segments {
             Box::new(Memory::create(heap_size, true))
         };
 
+        // always store in DRAM (Therefore create Box in DRAM)
+        // let mut data: Box<dyn Datapool> = Box::new(Memory::create(heap_size, true));
+        
+        // let mut data: Box<dyn Datapool> = Box::new(Memory::create(heap_size, true));
+
+        // if let Some(data_file) = builder.datapool_path {
+
+        //     data_file_backed = true;
+        //     data_on_existing_file = std::fs::metadata(&data_file).is_ok();
+
+        //     // Read Datafile
+        //     let mut pool = File::create(data_file, data_size, true)
+        //         .expect("failed to allocate file backed storage");
+
+        //     // Copy File to DRAM
+        //     let mut bytes = vec![0; data_size];
+        //     // retrieve stored data
+        //     let stored_data = bytes.copy_from_slice(pool.as_mut_slice());
+        //     // let segment_data = Memory::from(stored_data.into_boxed_slice());
+
+        //     // mem = 
+        //     // data = Box::from_raw(&stored_data)
+            
+        //     // let mut data = vec![0; self.heap_size()];
+        //     // data.clone_from_slice(self.data.as_slice());
+        //     // let segment_data = Memory::from(data.into_boxed_slice());
+            
+        // }
+
         // If `builder.restore` `Segments.data` is file backed with an existing
         // file and metadata` to restore the `Segments` with, restore relevant
         // `Segments` fields. Otherwise create a new `Segments`.
         if builder.restore && data_on_existing_file {
+
+            // let data = unsafe { *(stored_data.as_mut_ptr() as *mut Datapool) };
+
             if let Some(metadata) = option_metadata {
                 // TODO: like with the HashTable fields, we assume that the configuration
                 // options for `Segments` hasn't changed upon recovery. We need a way to
@@ -233,22 +271,22 @@ impl Segments {
     }
 
     pub fn flush_data(&self, datapool: &mut [u8]) -> std::io::Result<()> {
+
+        // assume datapool store file is empty
+        let mut offset = 0;
+
+        // Get Box Pointer
+        let byte_ptr = (Box::into_raw(self.clone().data)) as *const u8;
+
+        // Get Data Size
+        let data_size = self.heap_size();
+
+        // store::store_bytes_and_update_offset(byte_ptr, offset, data_size, datapool);
+
         // if self.data_file_backed {
         //     self.data.flush()?;
         // }
 
-        if self.data_file_backed {
-            self.data.flush()?;
-        }
-
-        let mut offset = 0;
-
-        // Get Box Pointer
-        let byte_ptr = Box::into_raw(self.clone().data);
-
-        // Get Data Size
-        let data_size = self.file_size();
-        // store::store_bytes_and_update_offset(byte_ptr, offset, data_size, datapool);
         Ok(())
     }
     /// Flushes the `Segments` by flushing the `Segments.data` (if filed backed)
@@ -1148,9 +1186,8 @@ impl Segments {
                             + flush_at_size
     }
 
-    pub fn file_size(&self) -> usize {
-        // return self.data_size;
-        return 0;
+    pub fn heap_size(&self) -> usize {
+        return self.segment_size as usize * self.cap as usize;
     }
 }
 
@@ -1177,8 +1214,7 @@ impl Clone for Segments {
     // Used in testing to clone a `Segments` to compare equivalency with
     fn clone(&self) -> Self {
         // clone `data`
-        let heap_size = self.segment_size as usize * self.cap as usize;
-        let mut data = vec![0; heap_size];
+        let mut data = vec![0; self.heap_size()];
         data.clone_from_slice(self.data.as_slice());
         let segment_data = Memory::from(data.into_boxed_slice());
         //let segment_data = Memory::memory_from_data(data.into_boxed_slice());
