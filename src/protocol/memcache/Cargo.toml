@@ -1,0 +1,23 @@
+[package]
+name = "protocol-memcache"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[[bench]]
+name = "request-parsing"
+path = "benches/request_parsing.rs"
+harness = false
+
+[dependencies]
+common = { path = "../../common" }
+logger = { path = "../../logger" }
+nom = "5.1.2"
+protocol-common = { path = "../../protocol/common" }
+rustcommon-metrics = { git = "https://github.com/twitter/rustcommon" }
+session = { path = "../../session" }
+
+
+[dev-dependencies]
+criterion = "0.3.4"
