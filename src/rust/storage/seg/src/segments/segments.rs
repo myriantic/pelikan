@@ -90,7 +90,7 @@ impl Segments {
         let mut data: Box<dyn Datapool> = if let Some(file) = builder.datapool_path {
             data_file_backed = true;
             data_on_existing_file = std::fs::metadata(&file).is_ok();
-            let pool = File::create(file, heap_size, true)
+            let pool = FileBacked::create(file, heap_size)
                 .expect("failed to allocate file backed storage");
             Box::new(pool)
         } else {
@@ -232,28 +232,9 @@ impl Segments {
         }
     }
 
-    pub fn flush_data(&self, datapool: &mut [u8]) -> std::io::Result<()> {
-        // if self.data_file_backed {
-        //     self.data.flush()?;
-        // }
-
-        if self.data_file_backed {
-            self.data.flush()?;
-        }
-
-        let mut offset = 0;
-
-        // Get Box Pointer
-        let byte_ptr = Box::into_raw(self.clone().data);
-
-        // Get Data Size
-        let data_size = self.file_size();
-        // store::store_bytes_and_update_offset(byte_ptr, offset, data_size, datapool);
-        Ok(())
-    }
     /// Flushes the `Segments` by flushing the `Segments.data` (if filed backed)
     /// and copying the other `Segments` fields' by copying it to `metadata`
-    pub fn flush_meta(&self, metadata: &mut [u8]) -> std::io::Result<()> {
+    pub fn flush(&self, metadata: &mut [u8]) -> std::io::Result<()> {
         // if `Segments.data` is file backed, flush it to file
 
         let header_size: usize = ::std::mem::size_of::<SegmentHeader>();
@@ -1149,8 +1130,7 @@ impl Segments {
     }
 
     pub fn file_size(&self) -> usize {
-        // return self.data_size;
-        return 0;
+        return self.data_size;
     }
 }
 

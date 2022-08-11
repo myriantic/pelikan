@@ -86,7 +86,7 @@ impl Datapool for File {
         &mut self.mmap[..self.size]
     }
 
-    fn flush(&self) -> Result<(), std::io::Error> {
+    fn flush(&mut self) -> Result<(), std::io::Error> {
         self.mmap.flush()
     }
 }

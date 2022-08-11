@@ -46,7 +46,7 @@ impl Datapool for Memory {
         &mut self.data
     }
 
-    fn flush(&self) -> Result<(), std::io::Error> {
+    fn flush(&mut self) -> Result<(), std::io::Error> {
         Ok(())
     }
 }

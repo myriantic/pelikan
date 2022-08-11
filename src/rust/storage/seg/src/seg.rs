@@ -63,18 +63,11 @@ impl Seg {
     pub fn flush(&self) -> std::io::Result<()> {
         if self.graceful_shutdown {
 
-            // Backup Datapool from DRAM to PMEM
+            // Backup Datapool
             if let Some(file) = &self.datapool_path {
-
-                let file_size = self.segments.file_size();
-
-                // Mmap file
-                let mut pool = File::create(file, file_size, true)
+                let mut pool = FileBacked::open(file, self.segments.file_size())
                     .expect("failed to allocate file backed storage");
-                let datapool = pool.as_mut_slice();
-
-                // self.segments.flush_data(datapool[offset..])?;
-
+                pool.flush()?;
             }
 
             // Backup Metadata from DRAM to PMEM
@@ -92,13 +85,12 @@ impl Seg {
                 let mut offset = self.hashtable.recover_size();
                 self.ttl_buckets.flush(&mut metadata[offset..]);
                 offset += self.ttl_buckets.recover_size();
-                self.segments.flush_meta(&mut metadata[offset..])?;
+                self.segments.flush(&mut metadata[offset..])?;
 
                 // TODO: check if this flushes the CPU caches
                 pool.flush()?;
                 return Ok(());
             }
-            // return Ok(());
         }
 
         Err(std::io::Error::new(

@@ -1,6 +1,6 @@
 // use super::File;
 use super::Memory;
-use crate::datapool::*;
+use crate::datapool::Datapool;
 
 use std::path::Path;
 use std::fs::{File, OpenOptions};
@@ -72,7 +72,7 @@ impl FileBacked {
 
 }
 
-impl MutDatapool for FileBacked {
+impl Datapool for FileBacked {
 
     fn as_slice(self: &FileBacked) -> &[u8] {
         return self.memory.as_slice();
