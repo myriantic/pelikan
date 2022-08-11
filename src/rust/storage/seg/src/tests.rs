@@ -547,7 +547,7 @@ fn new_cache_file_backed() {
     // create new, file backed cache
     let restore = false;
     let graceful_shutdown = false;
-    let cache = make_cache(restore, datapool_path, None, graceful_shutdown);
+    let mut cache = make_cache(restore, datapool_path, None, graceful_shutdown);
 
     // the `Segments.data` should be filed backed
     assert!(cache.segments.data_file_backed());
@@ -562,7 +562,7 @@ fn new_cache_not_file_backed() {
     // create new, not file backed cache
     let restore = false;
     let graceful_shutdown = false;
-    let cache = make_cache(restore, None, None, graceful_shutdown);
+    let mut cache = make_cache(restore, None, None, graceful_shutdown);
 
     // the `Segments.data` should not be filed backed
     assert!(!cache.segments.data_file_backed());
@@ -577,7 +577,7 @@ fn new_cache_not_file_backed() {
 fn restored_cache_no_paths_set() {
     let restore = true;
     let graceful_shutdown = false;
-    let cache = make_cache(restore, None, None, graceful_shutdown);
+    let mut cache = make_cache(restore, None, None, graceful_shutdown);
 
     // the `Segments.data` should not be filed backed
     assert!(!cache.segments.data_file_backed());
@@ -599,7 +599,7 @@ fn cache_gracefully_shutdown() {
     // create new, file backed cache
     let restore = false;
     let graceful_shutdown = true;
-    let cache = make_cache(restore, datapool_path, metadata_path, graceful_shutdown);
+    let mut cache = make_cache(restore, datapool_path, metadata_path, graceful_shutdown);
 
     // Flush cache
     assert!(cache.flush().is_ok());
@@ -617,7 +617,7 @@ fn cache_not_gracefully_shutdown() {
     // create new, file backed cache
     let restore = false;
     let graceful_shutdown = true;
-    let cache = make_cache(
+    let mut cache = make_cache(
         restore,
         datapool_path,
         None, // Don't set a `HashTable` path
@@ -704,7 +704,7 @@ fn new_file_backed_cache_not_changed_and_restored() {
     let mut restore = false;
     let mut graceful_shutdown = true;
 
-    let cache = make_cache(restore, datapool_path, metadata_path, graceful_shutdown);
+    let mut cache = make_cache(restore, datapool_path, metadata_path, graceful_shutdown);
 
     assert!(!cache.restored());
 

@@ -238,9 +238,14 @@ impl Segments {
         }
     }
 
+    pub fn flush_data(&mut self) -> std::io::Result<()> {
+        self.data.flush();
+        Ok(())
+    }
+
     /// Flushes the `Segments` by flushing the `Segments.data` (if filed backed)
     /// and copying the other `Segments` fields' by copying it to `metadata`
-    pub fn flush(&self, metadata: &mut [u8]) -> std::io::Result<()> {
+    pub fn flush_meta(&self, metadata: &mut [u8]) -> std::io::Result<()> {
         // if `Segments.data` is file backed, flush it to file
 
         let header_size: usize = ::std::mem::size_of::<SegmentHeader>();

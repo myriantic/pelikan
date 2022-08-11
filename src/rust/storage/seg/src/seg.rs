@@ -57,17 +57,20 @@ impl Seg {
         Builder::default()
     }
 
+    // pub fn flush_data(&mut self) -> std::io::Result<()> {
+    //     self.segments.flush_data();
+    //     return Ok(())
+    // }
+
     /// If `graceful_shutdown`, flushe cache by storing all the relevant fields
     /// of `Segments`, `HashTable` and `TtlBuckets` to the `metadata` file
     /// (if it exists) and flushing `Segments.data` (if it is file backed)
-    pub fn flush(&self) -> std::io::Result<()> {
+    pub fn flush(&mut self) -> std::io::Result<()> {
         if self.graceful_shutdown {
 
             // Backup Datapool
             if let Some(file) = &self.datapool_path {
-                // let mut pool = FileBacked::open(file, self.segments.file_size())
-                //     .expect("failed to allocate file backed storage");
-                // pool.flush()?;
+                self.segments.flush_data()?;
             }
 
             // Backup Metadata from DRAM to PMEM
@@ -85,7 +88,7 @@ impl Seg {
                 let mut offset = self.hashtable.recover_size();
                 self.ttl_buckets.flush(&mut metadata[offset..]);
                 offset += self.ttl_buckets.recover_size();
-                self.segments.flush(&mut metadata[offset..])?;
+                self.segments.flush_meta(&mut metadata[offset..])?;
 
                 // TODO: check if this flushes the CPU caches
                 pool.flush()?;
