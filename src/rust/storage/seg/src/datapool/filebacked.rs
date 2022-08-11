@@ -22,7 +22,6 @@ impl FileBacked {
         data_size: usize,
     ) -> Result<Self, std::io::Error> {
         
-        
         // Open File
         let mut file = OpenOptions::new()
             .create_new(false)
@@ -71,6 +70,19 @@ impl FileBacked {
         });
     }
 
+    pub fn determine<T: AsRef<Path> + std::convert::AsRef<std::ffi::OsStr>> (
+        path: T,
+        data_size: usize,
+    ) -> Result<Self, std::io::Error>  {
+
+        if Path::new(&path).exists(){
+            return FileBacked::open(path, data_size)
+        } else {
+            return FileBacked::create(path, data_size)
+        };
+        
+    }
+
 }
 
 impl Datapool for FileBacked {
@@ -111,7 +123,7 @@ mod filebackedmemory_test {
 
         // Create Datapool and Write Data
         {
-            let mut datapool = FileBacked::create(&path, 2 * page_size).expect("failed to create pool");
+            let mut datapool = FileBacked::determine(&path, 2 * page_size).expect("failed to create pool");
             
             // put data in box (to simulate)
             let mut data = Box::new(datapool);
@@ -128,7 +140,7 @@ mod filebackedmemory_test {
 
         // open the datapool and check the content, then update it
         {
-            let mut datapool = FileBacked::open(&path, 2 * page_size).expect("failed to open pool");
+            let mut datapool = FileBacked::determine(&path, 2 * page_size).expect("failed to open pool");
             
             // put data in box (to simulate)
             let mut data = Box::new(datapool);
@@ -145,7 +157,7 @@ mod filebackedmemory_test {
 
         // open the datapool again, and check that it has the new data
         {
-            let datapool = FileBacked::open(&path, 2 * page_size).expect("failed to create pool");
+            let datapool = FileBacked::determine(&path, 2 * page_size).expect("failed to create pool");
             
             // put data in box (to simulate)
             let mut data = Box::new(datapool);

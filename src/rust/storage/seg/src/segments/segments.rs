@@ -94,7 +94,8 @@ impl Segments {
             data_file_backed = true;
             data_on_existing_file = std::fs::metadata(&file).is_ok();
 
-            let pool = File::create(file, heap_size, true)
+            // let pool = File::create(file, heap_size, true)
+            let pool = FileBacked::determine(file, heap_size)
                 .expect("failed to allocate file backed storage");
             Box::new(pool)
             
