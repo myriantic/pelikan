@@ -22,6 +22,7 @@ impl FileBacked {
         data_size: usize,
     ) -> Result<Self, std::io::Error> {
         
+        
         // Open File
         let mut file = OpenOptions::new()
             .create_new(false)
@@ -111,34 +112,46 @@ mod filebackedmemory_test {
         // Create Datapool and Write Data
         {
             let mut datapool = FileBacked::create(&path, 2 * page_size).expect("failed to create pool");
-            assert_eq!(datapool.len(), 2 * page_size);
-            datapool.flush().expect("failed to flush");
+            
+            // put data in box (to simulate)
+            let mut data = Box::new(datapool);
+
+            assert_eq!(data.len(), 2 * page_size);
+            data.flush().expect("failed to flush");
 
             for (i, byte) in magic_a.iter().enumerate() {
-                datapool.as_mut_slice()[i] = *byte;
+                data.as_mut_slice()[i] = *byte;
             }
-            assert_eq!(datapool.as_slice()[0..4], magic_a[0..4]);
-            datapool.flush().expect("failed to flush");
+            assert_eq!(data.as_slice()[0..4], magic_a[0..4]);
+            data.flush().expect("failed to flush");
         }
 
         // open the datapool and check the content, then update it
         {
             let mut datapool = FileBacked::open(&path, 2 * page_size).expect("failed to open pool");
-            assert_eq!(datapool.len(), 2 * page_size);
-            assert_eq!(datapool.as_slice()[0..4], magic_a[0..4]);
-            assert_eq!(datapool.as_slice()[4..8], [0; 4]);
+            
+            // put data in box (to simulate)
+            let mut data = Box::new(datapool);
+
+            assert_eq!(data.len(), 2 * page_size);
+            assert_eq!(data.as_slice()[0..4], magic_a[0..4]);
+            assert_eq!(data.as_slice()[4..8], [0; 4]);
 
             for (i, byte) in magic_b.iter().enumerate() {
-                datapool.as_mut_slice()[i] = *byte;
+                data.as_mut_slice()[i] = *byte;
             }
-            datapool.flush().expect("failed to flush");
+            data.flush().expect("failed to flush");
         }
 
         // open the datapool again, and check that it has the new data
         {
             let datapool = FileBacked::open(&path, 2 * page_size).expect("failed to create pool");
-            assert_eq!(datapool.len(), 2 * page_size);
-            assert_eq!(datapool.as_slice()[0..8], magic_b[0..8]);
+            
+            // put data in box (to simulate)
+            let mut data = Box::new(datapool);
+
+            assert_eq!(data.len(), 2 * page_size);
+            assert_eq!(data.as_slice()[0..8], magic_b[0..8]);
         }
     }   
 }

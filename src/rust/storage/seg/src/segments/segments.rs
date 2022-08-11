@@ -8,6 +8,8 @@ use crate::item::*;
 use crate::seg::{SEGMENT_REQUEST, SEGMENT_REQUEST_SUCCESS};
 use crate::segments::*;
 
+use std::path::Path;
+
 use core::num::NonZeroU32;
 use metrics::{static_metrics, Counter, Gauge};
 
@@ -88,11 +90,14 @@ impl Segments {
 
         // TODO(bmartin): we always prefault, this should be configurable
         let mut data: Box<dyn Datapool> = if let Some(file) = builder.datapool_path {
+
             data_file_backed = true;
             data_on_existing_file = std::fs::metadata(&file).is_ok();
-            let pool = FileBacked::create(file, heap_size)
+
+            let pool = File::create(file, heap_size, true)
                 .expect("failed to allocate file backed storage");
             Box::new(pool)
+            
         } else {
             Box::new(Memory::create(heap_size, true))
         };

@@ -65,9 +65,9 @@ impl Seg {
 
             // Backup Datapool
             if let Some(file) = &self.datapool_path {
-                let mut pool = FileBacked::open(file, self.segments.file_size())
-                    .expect("failed to allocate file backed storage");
-                pool.flush()?;
+                // let mut pool = FileBacked::open(file, self.segments.file_size())
+                //     .expect("failed to allocate file backed storage");
+                // pool.flush()?;
             }
 
             // Backup Metadata from DRAM to PMEM
