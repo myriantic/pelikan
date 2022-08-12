@@ -8,7 +8,7 @@ use crate::datapool::*;
 use crate::Value;
 use crate::*;
 use std::cmp::min;
-use std::path::PathBuf;
+use std::path::{PathBuf, Path};
 
 use metrics::{static_metrics, Counter};
 
@@ -57,21 +57,43 @@ impl Seg {
         Builder::default()
     }
 
-    // pub fn flush_data(&mut self) -> std::io::Result<()> {
-    //     self.segments.flush_data();
-    //     return Ok(())
-    // }
-
-    /// If `graceful_shutdown`, flushe cache by storing all the relevant fields
-    /// of `Segments`, `HashTable` and `TtlBuckets` to the `metadata` file
-    /// (if it exists) and flushing `Segments.data` (if it is file backed)
     pub fn flush(&mut self) -> std::io::Result<()> {
+        self.flush_data();
+        return self.flush_meta(); // Passes isErr test, but need to check for correctness
+
+        // self.flush_meta();
+        // return Ok(()) 
+    }
+
+    pub fn flush_data(&mut self) -> std::io::Result<()> {
+
         if self.graceful_shutdown {
 
             // Backup Datapool
             if let Some(file) = &self.datapool_path {
                 self.segments.flush_data()?;
+                return Ok(());
             }
+        }
+
+        Err(std::io::Error::new(
+            std::io::ErrorKind::Other,
+            "Path to datapool to is None, cannot gracefully
+                shutdown cache",
+        ))
+    }
+
+    /// If `graceful_shutdown`, flushe cache by storing all the relevant fields
+    /// of `Segments`, `HashTable` and `TtlBuckets` to the `metadata` file
+    /// (if it exists) and flushing `Segments.data` (if it is file backed)
+    pub fn flush_meta(&mut self) -> std::io::Result<()> {
+
+        if self.graceful_shutdown {
+
+            // // Backup Datapool
+            // if let Some(file) = &self.datapool_path {
+            //     self.segments.flush_data()?;
+            // }
 
             // Backup Metadata from DRAM to PMEM
             if let Some(file) = &self.metadata_path {
@@ -94,6 +116,7 @@ impl Seg {
                 pool.flush()?;
                 return Ok(());
             }
+
         }
 
         Err(std::io::Error::new(
