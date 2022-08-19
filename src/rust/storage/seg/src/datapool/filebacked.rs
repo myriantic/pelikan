@@ -4,10 +4,7 @@ use crate::datapool::Datapool;
 
 use std::path::Path;
 use std::fs::{File, OpenOptions};
-use std::io::prelude::*;
 use std::io::{Read, Seek, Write, SeekFrom};
-
-// const HEADER_SIZE: usize = core::mem::size_of::<Header>();
 
 pub struct FileBacked {
     memory: Memory,
@@ -123,7 +120,7 @@ mod filebackedmemory_test {
 
         // Create Datapool and Write Data
         {
-            let mut datapool = FileBacked::determine(&path, 2 * page_size).expect("failed to create pool");
+            let datapool = FileBacked::determine(&path, 2 * page_size).expect("failed to create pool");
             
             // put data in box (to simulate)
             let mut data = Box::new(datapool);
@@ -140,7 +137,7 @@ mod filebackedmemory_test {
 
         // open the datapool and check the content, then update it
         {
-            let mut datapool = FileBacked::determine(&path, 2 * page_size).expect("failed to open pool");
+            let datapool = FileBacked::determine(&path, 2 * page_size).expect("failed to open pool");
             
             // put data in box (to simulate)
             let mut data = Box::new(datapool);
@@ -160,7 +157,7 @@ mod filebackedmemory_test {
             let datapool = FileBacked::determine(&path, 2 * page_size).expect("failed to create pool");
             
             // put data in box (to simulate)
-            let mut data = Box::new(datapool);
+            let data = Box::new(datapool);
 
             assert_eq!(data.len(), 2 * page_size);
             assert_eq!(data.as_slice()[0..8], magic_b[0..8]);

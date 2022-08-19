@@ -29,7 +29,7 @@ threads = 4
 # hash power adjusts how many items can be held in the hashtable
 hash_power = 22
 # total bytes to use for item storage - 4GiB
-heap_size = 4294967296
+heap_size = 2147483648
 # size of each segment in bytes - 1MiB
 segment_size = 1048576
 # number of segments for a non-evict compaction

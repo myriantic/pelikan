@@ -1140,9 +1140,6 @@ impl Segments {
                             + flush_at_size
     }
 
-    pub fn file_size(&self) -> usize {
-        return self.data_size;
-    }
 }
 
 impl Default for Segments {
