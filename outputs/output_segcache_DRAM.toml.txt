@@ -1,0 +1,266 @@
+2022-08-18T14:00:25.143+00:00 INFO  [rpc-replay] -----
+2022-08-18T14:00:25.143+00:00 INFO  [rpc-replay] Window: 0
+2022-08-18T14:00:25.143+00:00 INFO  [rpc-replay] Connections: Attempts: 0 Opened: 0 Errors: 0 Timeouts: 0 Open: 0
+2022-08-18T14:00:25.143+00:00 INFO  [rpc-replay] Rate: Request: 428400.38 rps Response: 428393.71 rps Connect: 0.00 cps
+2022-08-18T14:00:25.143+00:00 INFO  [rpc-replay] Success: Request: 100.00 % Response: 100.00 % Connect: 100.00 %
+2022-08-18T14:00:25.143+00:00 INFO  [rpc-replay] Hit-rate: 13.66 %
+2022-08-18T14:00:25.143+00:00 INFO  [rpc-replay] Response Latency (us): p25: 0 p50: 0 p75: 0 p90: 0 p99: 0 p999: 0 p9999: 0
+2022-08-18T14:01:25.138+00:00 INFO  [rpc-replay] -----
+2022-08-18T14:01:25.138+00:00 INFO  [rpc-replay] Window: 1
+2022-08-18T14:01:25.138+00:00 INFO  [rpc-replay] Connections: Attempts: 0 Opened: 0 Errors: 0 Timeouts: 0 Open: 0
+2022-08-18T14:01:25.138+00:00 INFO  [rpc-replay] Rate: Request: 429866.04 rps Response: 429865.99 rps Connect: 0.00 cps
+2022-08-18T14:01:25.138+00:00 INFO  [rpc-replay] Success: Request: 100.00 % Response: 100.00 % Connect: 100.00 %
+2022-08-18T14:01:25.138+00:00 INFO  [rpc-replay] Hit-rate: 23.97 %
+2022-08-18T14:01:25.138+00:00 INFO  [rpc-replay] Response Latency (us): p25: 0 p50: 0 p75: 0 p90: 0 p99: 0 p999: 0 p9999: 0
+2022-08-18T14:02:25.141+00:00 INFO  [rpc-replay] -----
+2022-08-18T14:02:25.141+00:00 INFO  [rpc-replay] Window: 2
+2022-08-18T14:02:25.141+00:00 INFO  [rpc-replay] Connections: Attempts: 0 Opened: 0 Errors: 0 Timeouts: 0 Open: 0
+2022-08-18T14:02:25.141+00:00 INFO  [rpc-replay] Rate: Request: 429519.43 rps Response: 429519.48 rps Connect: 0.00 cps
+2022-08-18T14:02:25.141+00:00 INFO  [rpc-replay] Success: Request: 100.00 % Response: 100.00 % Connect: 100.00 %
+2022-08-18T14:02:25.141+00:00 INFO  [rpc-replay] Hit-rate: 32.57 %
+2022-08-18T14:02:25.141+00:00 INFO  [rpc-replay] Response Latency (us): p25: 0 p50: 0 p75: 0 p90: 0 p99: 0 p999: 0 p9999: 0
+2022-08-18T14:03:25.138+00:00 INFO  [rpc-replay] -----
+2022-08-18T14:03:25.138+00:00 INFO  [rpc-replay] Window: 3
+2022-08-18T14:03:25.138+00:00 INFO  [rpc-replay] Connections: Attempts: 0 Opened: 0 Errors: 0 Timeouts: 0 Open: 0
+2022-08-18T14:03:25.138+00:00 INFO  [rpc-replay] Rate: Request: 426014.43 rps Response: 426014.43 rps Connect: 0.00 cps
+2022-08-18T14:03:25.138+00:00 INFO  [rpc-replay] Success: Request: 100.00 % Response: 100.00 % Connect: 100.00 %
+2022-08-18T14:03:25.138+00:00 INFO  [rpc-replay] Hit-rate: 40.00 %
+2022-08-18T14:03:25.138+00:00 INFO  [rpc-replay] Response Latency (us): p25: 0 p50: 0 p75: 0 p90: 0 p99: 0 p999: 0 p9999: 0
+2022-08-18T14:04:25.140+00:00 INFO  [rpc-replay] -----
+2022-08-18T14:04:25.140+00:00 INFO  [rpc-replay] Window: 4
+2022-08-18T14:04:25.141+00:00 INFO  [rpc-replay] Connections: Attempts: 0 Opened: 0 Errors: 0 Timeouts: 0 Open: 0
+2022-08-18T14:04:25.141+00:00 INFO  [rpc-replay] Rate: Request: 422505.00 rps Response: 422504.98 rps Connect: 0.00 cps
+2022-08-18T14:04:25.141+00:00 INFO  [rpc-replay] Success: Request: 100.00 % Response: 100.00 % Connect: 100.00 %
+2022-08-18T14:04:25.141+00:00 INFO  [rpc-replay] Hit-rate: 47.48 %
+2022-08-18T14:04:25.141+00:00 INFO  [rpc-replay] Response Latency (us): p25: 0 p50: 0 p75: 0 p90: 0 p99: 0 p999: 0 p9999: 0
+2022-08-18T14:05:25.144+00:00 INFO  [rpc-replay] -----
+2022-08-18T14:05:25.145+00:00 INFO  [rpc-replay] Window: 5
+2022-08-18T14:05:25.145+00:00 INFO  [rpc-replay] Connections: Attempts: 0 Opened: 0 Errors: 0 Timeouts: 0 Open: 0
+2022-08-18T14:05:25.145+00:00 INFO  [rpc-replay] Rate: Request: 421760.85 rps Response: 421760.87 rps Connect: 0.00 cps
+2022-08-18T14:05:25.145+00:00 INFO  [rpc-replay] Success: Request: 100.00 % Response: 100.00 % Connect: 100.00 %
+2022-08-18T14:05:25.145+00:00 INFO  [rpc-replay] Hit-rate: 52.95 %
+2022-08-18T14:05:25.145+00:00 INFO  [rpc-replay] Response Latency (us): p25: 0 p50: 0 p75: 0 p90: 0 p99: 0 p999: 0 p9999: 0
+2022-08-18T14:06:25.139+00:00 INFO  [rpc-replay] -----
+2022-08-18T14:06:25.139+00:00 INFO  [rpc-replay] Window: 6
+2022-08-18T14:06:25.139+00:00 INFO  [rpc-replay] Connections: Attempts: 0 Opened: 0 Errors: 0 Timeouts: 0 Open: 0
+2022-08-18T14:06:25.139+00:00 INFO  [rpc-replay] Rate: Request: 427201.60 rps Response: 427201.56 rps Connect: 0.00 cps
+2022-08-18T14:06:25.139+00:00 INFO  [rpc-replay] Success: Request: 100.00 % Response: 100.00 % Connect: 100.00 %
+2022-08-18T14:06:25.139+00:00 INFO  [rpc-replay] Hit-rate: 57.94 %
+2022-08-18T14:06:25.139+00:00 INFO  [rpc-replay] Response Latency (us): p25: 0 p50: 0 p75: 0 p90: 0 p99: 0 p999: 0 p9999: 0
+2022-08-18T14:07:25.143+00:00 INFO  [rpc-replay] -----
+2022-08-18T14:07:25.143+00:00 INFO  [rpc-replay] Window: 7
+2022-08-18T14:07:25.143+00:00 INFO  [rpc-replay] Connections: Attempts: 0 Opened: 0 Errors: 0 Timeouts: 0 Open: 0
+2022-08-18T14:07:25.144+00:00 INFO  [rpc-replay] Rate: Request: 426961.07 rps Response: 426961.08 rps Connect: 0.00 cps
+2022-08-18T14:07:25.144+00:00 INFO  [rpc-replay] Success: Request: 100.00 % Response: 100.00 % Connect: 100.00 %
+2022-08-18T14:07:25.144+00:00 INFO  [rpc-replay] Hit-rate: 63.35 %
+2022-08-18T14:07:25.144+00:00 INFO  [rpc-replay] Response Latency (us): p25: 0 p50: 0 p75: 0 p90: 0 p99: 0 p999: 0 p9999: 0
+2022-08-18T14:08:25.137+00:00 INFO  [rpc-replay] -----
+2022-08-18T14:08:25.137+00:00 INFO  [rpc-replay] Window: 8
+2022-08-18T14:08:25.137+00:00 INFO  [rpc-replay] Connections: Attempts: 0 Opened: 0 Errors: 0 Timeouts: 0 Open: 0
+2022-08-18T14:08:25.137+00:00 INFO  [rpc-replay] Rate: Request: 426352.62 rps Response: 426352.64 rps Connect: 0.00 cps
+2022-08-18T14:08:25.137+00:00 INFO  [rpc-replay] Success: Request: 100.00 % Response: 100.00 % Connect: 100.00 %
+2022-08-18T14:08:25.137+00:00 INFO  [rpc-replay] Hit-rate: 64.97 %
+2022-08-18T14:08:25.137+00:00 INFO  [rpc-replay] Response Latency (us): p25: 0 p50: 0 p75: 0 p90: 0 p99: 0 p999: 0 p9999: 0
+2022-08-18T14:09:25.140+00:00 INFO  [rpc-replay] -----
+2022-08-18T14:09:25.140+00:00 INFO  [rpc-replay] Window: 9
+2022-08-18T14:09:25.140+00:00 INFO  [rpc-replay] Connections: Attempts: 0 Opened: 0 Errors: 0 Timeouts: 0 Open: 0
+2022-08-18T14:09:25.140+00:00 INFO  [rpc-replay] Rate: Request: 427196.24 rps Response: 427196.22 rps Connect: 0.00 cps
+2022-08-18T14:09:25.140+00:00 INFO  [rpc-replay] Success: Request: 100.00 % Response: 100.00 % Connect: 100.00 %
+2022-08-18T14:09:25.140+00:00 INFO  [rpc-replay] Hit-rate: 66.43 %
+2022-08-18T14:09:25.140+00:00 INFO  [rpc-replay] Response Latency (us): p25: 0 p50: 0 p75: 0 p90: 0 p99: 0 p999: 0 p9999: 0
+2022-08-18T14:10:25.144+00:00 INFO  [rpc-replay] -----
+2022-08-18T14:10:25.144+00:00 INFO  [rpc-replay] Window: 10
+2022-08-18T14:10:25.144+00:00 INFO  [rpc-replay] Connections: Attempts: 0 Opened: 0 Errors: 0 Timeouts: 0 Open: 0
+2022-08-18T14:10:25.144+00:00 INFO  [rpc-replay] Rate: Request: 427201.91 rps Response: 427201.93 rps Connect: 0.00 cps
+2022-08-18T14:10:25.144+00:00 INFO  [rpc-replay] Success: Request: 100.00 % Response: 100.00 % Connect: 100.00 %
+2022-08-18T14:10:25.144+00:00 INFO  [rpc-replay] Hit-rate: 66.94 %
+2022-08-18T14:10:25.144+00:00 INFO  [rpc-replay] Response Latency (us): p25: 0 p50: 0 p75: 0 p90: 0 p99: 0 p999: 0 p9999: 0
+2022-08-18T14:11:25.140+00:00 INFO  [rpc-replay] -----
+2022-08-18T14:11:25.140+00:00 INFO  [rpc-replay] Window: 11
+2022-08-18T14:11:25.140+00:00 INFO  [rpc-replay] Connections: Attempts: 0 Opened: 0 Errors: 0 Timeouts: 0 Open: 0
+2022-08-18T14:11:25.140+00:00 INFO  [rpc-replay] Rate: Request: 424757.12 rps Response: 424757.10 rps Connect: 0.00 cps
+2022-08-18T14:11:25.140+00:00 INFO  [rpc-replay] Success: Request: 100.00 % Response: 100.00 % Connect: 100.00 %
+2022-08-18T14:11:25.140+00:00 INFO  [rpc-replay] Hit-rate: 67.82 %
+2022-08-18T14:11:25.140+00:00 INFO  [rpc-replay] Response Latency (us): p25: 0 p50: 0 p75: 0 p90: 0 p99: 0 p999: 0 p9999: 0
+2022-08-18T14:12:25.140+00:00 INFO  [rpc-replay] -----
+2022-08-18T14:12:25.140+00:00 INFO  [rpc-replay] Window: 12
+2022-08-18T14:12:25.140+00:00 INFO  [rpc-replay] Connections: Attempts: 0 Opened: 0 Errors: 0 Timeouts: 0 Open: 0
+2022-08-18T14:12:25.140+00:00 INFO  [rpc-replay] Rate: Request: 422502.61 rps Response: 422502.63 rps Connect: 0.00 cps
+2022-08-18T14:12:25.140+00:00 INFO  [rpc-replay] Success: Request: 100.00 % Response: 100.00 % Connect: 100.00 %
+2022-08-18T14:12:25.140+00:00 INFO  [rpc-replay] Hit-rate: 69.09 %
+2022-08-18T14:12:25.140+00:00 INFO  [rpc-replay] Response Latency (us): p25: 0 p50: 0 p75: 0 p90: 0 p99: 0 p999: 0 p9999: 0
+2022-08-18T14:13:25.142+00:00 INFO  [rpc-replay] -----
+2022-08-18T14:13:25.142+00:00 INFO  [rpc-replay] Window: 13
+2022-08-18T14:13:25.142+00:00 INFO  [rpc-replay] Connections: Attempts: 0 Opened: 0 Errors: 0 Timeouts: 0 Open: 0
+2022-08-18T14:13:25.142+00:00 INFO  [rpc-replay] Rate: Request: 421006.24 rps Response: 421006.22 rps Connect: 0.00 cps
+2022-08-18T14:13:25.142+00:00 INFO  [rpc-replay] Success: Request: 100.00 % Response: 100.00 % Connect: 100.00 %
+2022-08-18T14:13:25.142+00:00 INFO  [rpc-replay] Hit-rate: 69.79 %
+2022-08-18T14:13:25.142+00:00 INFO  [rpc-replay] Response Latency (us): p25: 0 p50: 0 p75: 0 p90: 0 p99: 0 p999: 0 p9999: 0
+2022-08-18T14:14:25.145+00:00 INFO  [rpc-replay] -----
+2022-08-18T14:14:25.145+00:00 INFO  [rpc-replay] Window: 14
+2022-08-18T14:14:25.145+00:00 INFO  [rpc-replay] Connections: Attempts: 0 Opened: 0 Errors: 0 Timeouts: 0 Open: 0
+2022-08-18T14:14:25.145+00:00 INFO  [rpc-replay] Rate: Request: 419963.10 rps Response: 419963.08 rps Connect: 0.00 cps
+2022-08-18T14:14:25.145+00:00 INFO  [rpc-replay] Success: Request: 100.00 % Response: 100.00 % Connect: 100.00 %
+2022-08-18T14:14:25.145+00:00 INFO  [rpc-replay] Hit-rate: 70.44 %
+2022-08-18T14:14:25.145+00:00 INFO  [rpc-replay] Response Latency (us): p25: 0 p50: 0 p75: 0 p90: 0 p99: 0 p999: 0 p9999: 0
+2022-08-18T14:15:25.139+00:00 INFO  [rpc-replay] -----
+2022-08-18T14:15:25.139+00:00 INFO  [rpc-replay] Window: 15
+2022-08-18T14:15:25.139+00:00 INFO  [rpc-replay] Connections: Attempts: 0 Opened: 0 Errors: 0 Timeouts: 0 Open: 0
+2022-08-18T14:15:25.139+00:00 INFO  [rpc-replay] Rate: Request: 421474.83 rps Response: 421474.85 rps Connect: 0.00 cps
+2022-08-18T14:15:25.139+00:00 INFO  [rpc-replay] Success: Request: 100.00 % Response: 100.00 % Connect: 100.00 %
+2022-08-18T14:15:25.139+00:00 INFO  [rpc-replay] Hit-rate: 71.64 %
+2022-08-18T14:15:25.139+00:00 INFO  [rpc-replay] Response Latency (us): p25: 0 p50: 0 p75: 0 p90: 0 p99: 0 p999: 0 p9999: 0
+2022-08-18T14:16:25.144+00:00 INFO  [rpc-replay] -----
+2022-08-18T14:16:25.144+00:00 INFO  [rpc-replay] Window: 16
+2022-08-18T14:16:25.144+00:00 INFO  [rpc-replay] Connections: Attempts: 0 Opened: 0 Errors: 0 Timeouts: 0 Open: 0
+2022-08-18T14:16:25.144+00:00 INFO  [rpc-replay] Rate: Request: 423345.53 rps Response: 423345.53 rps Connect: 0.00 cps
+2022-08-18T14:16:25.144+00:00 INFO  [rpc-replay] Success: Request: 100.00 % Response: 100.00 % Connect: 100.00 %
+2022-08-18T14:16:25.144+00:00 INFO  [rpc-replay] Hit-rate: 72.34 %
+2022-08-18T14:16:25.144+00:00 INFO  [rpc-replay] Response Latency (us): p25: 0 p50: 0 p75: 0 p90: 0 p99: 0 p999: 0 p9999: 0
+2022-08-18T14:17:25.140+00:00 INFO  [rpc-replay] -----
+2022-08-18T14:17:25.140+00:00 INFO  [rpc-replay] Window: 17
+2022-08-18T14:17:25.140+00:00 INFO  [rpc-replay] Connections: Attempts: 0 Opened: 0 Errors: 0 Timeouts: 0 Open: 0
+2022-08-18T14:17:25.140+00:00 INFO  [rpc-replay] Rate: Request: 423772.28 rps Response: 423772.30 rps Connect: 0.00 cps
+2022-08-18T14:17:25.140+00:00 INFO  [rpc-replay] Success: Request: 100.00 % Response: 100.00 % Connect: 100.00 %
+2022-08-18T14:17:25.140+00:00 INFO  [rpc-replay] Hit-rate: 72.97 %
+2022-08-18T14:17:25.140+00:00 INFO  [rpc-replay] Response Latency (us): p25: 0 p50: 0 p75: 0 p90: 0 p99: 0 p999: 0 p9999: 0
+2022-08-18T14:18:25.136+00:00 INFO  [rpc-replay] -----
+2022-08-18T14:18:25.136+00:00 INFO  [rpc-replay] Window: 18
+2022-08-18T14:18:25.136+00:00 INFO  [rpc-replay] Connections: Attempts: 0 Opened: 0 Errors: 0 Timeouts: 0 Open: 0
+2022-08-18T14:18:25.136+00:00 INFO  [rpc-replay] Rate: Request: 424390.72 rps Response: 424390.67 rps Connect: 0.00 cps
+2022-08-18T14:18:25.136+00:00 INFO  [rpc-replay] Success: Request: 100.00 % Response: 100.00 % Connect: 100.00 %
+2022-08-18T14:18:25.136+00:00 INFO  [rpc-replay] Hit-rate: 73.93 %
+2022-08-18T14:18:25.136+00:00 INFO  [rpc-replay] Response Latency (us): p25: 0 p50: 0 p75: 0 p90: 0 p99: 0 p999: 0 p9999: 0
+2022-08-18T14:19:25.141+00:00 INFO  [rpc-replay] -----
+2022-08-18T14:19:25.141+00:00 INFO  [rpc-replay] Window: 19
+2022-08-18T14:19:25.141+00:00 INFO  [rpc-replay] Connections: Attempts: 0 Opened: 0 Errors: 0 Timeouts: 0 Open: 0
+2022-08-18T14:19:25.141+00:00 INFO  [rpc-replay] Rate: Request: 423702.93 rps Response: 423702.98 rps Connect: 0.00 cps
+2022-08-18T14:19:25.141+00:00 INFO  [rpc-replay] Success: Request: 100.00 % Response: 100.00 % Connect: 100.00 %
+2022-08-18T14:19:25.141+00:00 INFO  [rpc-replay] Hit-rate: 74.55 %
+2022-08-18T14:19:25.142+00:00 INFO  [rpc-replay] Response Latency (us): p25: 0 p50: 0 p75: 0 p90: 0 p99: 0 p999: 0 p9999: 0
+2022-08-18T14:20:25.136+00:00 INFO  [rpc-replay] -----
+2022-08-18T14:20:25.136+00:00 INFO  [rpc-replay] Window: 20
+2022-08-18T14:20:25.136+00:00 INFO  [rpc-replay] Connections: Attempts: 0 Opened: 0 Errors: 0 Timeouts: 0 Open: 0
+2022-08-18T14:20:25.136+00:00 INFO  [rpc-replay] Rate: Request: 424471.83 rps Response: 424471.82 rps Connect: 0.00 cps
+2022-08-18T14:20:25.136+00:00 INFO  [rpc-replay] Success: Request: 100.00 % Response: 100.00 % Connect: 100.00 %
+2022-08-18T14:20:25.136+00:00 INFO  [rpc-replay] Hit-rate: 75.01 %
+2022-08-18T14:20:25.136+00:00 INFO  [rpc-replay] Response Latency (us): p25: 0 p50: 0 p75: 0 p90: 0 p99: 0 p999: 0 p9999: 0
+2022-08-18T14:21:25.141+00:00 INFO  [rpc-replay] -----
+2022-08-18T14:21:25.141+00:00 INFO  [rpc-replay] Window: 21
+2022-08-18T14:21:25.141+00:00 INFO  [rpc-replay] Connections: Attempts: 0 Opened: 0 Errors: 0 Timeouts: 0 Open: 0
+2022-08-18T14:21:25.141+00:00 INFO  [rpc-replay] Rate: Request: 420399.06 rps Response: 420399.06 rps Connect: 0.00 cps
+2022-08-18T14:21:25.141+00:00 INFO  [rpc-replay] Success: Request: 100.00 % Response: 100.00 % Connect: 100.00 %
+2022-08-18T14:21:25.141+00:00 INFO  [rpc-replay] Hit-rate: 74.71 %
+2022-08-18T14:21:25.142+00:00 INFO  [rpc-replay] Response Latency (us): p25: 0 p50: 0 p75: 0 p90: 0 p99: 0 p999: 0 p9999: 0
+2022-08-18T14:22:25.146+00:00 INFO  [rpc-replay] -----
+2022-08-18T14:22:25.146+00:00 INFO  [rpc-replay] Window: 22
+2022-08-18T14:22:25.146+00:00 INFO  [rpc-replay] Connections: Attempts: 0 Opened: 0 Errors: 0 Timeouts: 0 Open: 0
+2022-08-18T14:22:25.146+00:00 INFO  [rpc-replay] Rate: Request: 423806.82 rps Response: 423806.82 rps Connect: 0.00 cps
+2022-08-18T14:22:25.146+00:00 INFO  [rpc-replay] Success: Request: 100.00 % Response: 100.00 % Connect: 100.00 %
+2022-08-18T14:22:25.146+00:00 INFO  [rpc-replay] Hit-rate: 75.50 %
+2022-08-18T14:22:25.146+00:00 INFO  [rpc-replay] Response Latency (us): p25: 0 p50: 0 p75: 0 p90: 0 p99: 0 p999: 0 p9999: 0
+2022-08-18T14:23:25.142+00:00 INFO  [rpc-replay] -----
+2022-08-18T14:23:25.142+00:00 INFO  [rpc-replay] Window: 23
+2022-08-18T14:23:25.142+00:00 INFO  [rpc-replay] Connections: Attempts: 0 Opened: 0 Errors: 0 Timeouts: 0 Open: 0
+2022-08-18T14:23:25.142+00:00 INFO  [rpc-replay] Rate: Request: 422474.84 rps Response: 422474.84 rps Connect: 0.00 cps
+2022-08-18T14:23:25.142+00:00 INFO  [rpc-replay] Success: Request: 100.00 % Response: 100.00 % Connect: 100.00 %
+2022-08-18T14:23:25.142+00:00 INFO  [rpc-replay] Hit-rate: 76.03 %
+2022-08-18T14:23:25.142+00:00 INFO  [rpc-replay] Response Latency (us): p25: 0 p50: 0 p75: 0 p90: 0 p99: 0 p999: 0 p9999: 0
+2022-08-18T14:24:25.138+00:00 INFO  [rpc-replay] -----
+2022-08-18T14:24:25.138+00:00 INFO  [rpc-replay] Window: 24
+2022-08-18T14:24:25.138+00:00 INFO  [rpc-replay] Connections: Attempts: 0 Opened: 0 Errors: 0 Timeouts: 0 Open: 0
+2022-08-18T14:24:25.138+00:00 INFO  [rpc-replay] Rate: Request: 421306.87 rps Response: 421306.89 rps Connect: 0.00 cps
+2022-08-18T14:24:25.138+00:00 INFO  [rpc-replay] Success: Request: 100.00 % Response: 100.00 % Connect: 100.00 %
+2022-08-18T14:24:25.138+00:00 INFO  [rpc-replay] Hit-rate: 76.39 %
+2022-08-18T14:24:25.139+00:00 INFO  [rpc-replay] Response Latency (us): p25: 0 p50: 0 p75: 0 p90: 0 p99: 0 p999: 0 p9999: 0
+2022-08-18T14:25:25.144+00:00 INFO  [rpc-replay] -----
+2022-08-18T14:25:25.144+00:00 INFO  [rpc-replay] Window: 25
+2022-08-18T14:25:25.144+00:00 INFO  [rpc-replay] Connections: Attempts: 0 Opened: 0 Errors: 0 Timeouts: 0 Open: 0
+2022-08-18T14:25:25.144+00:00 INFO  [rpc-replay] Rate: Request: 419407.60 rps Response: 419407.58 rps Connect: 0.00 cps
+2022-08-18T14:25:25.144+00:00 INFO  [rpc-replay] Success: Request: 100.00 % Response: 100.00 % Connect: 100.00 %
+2022-08-18T14:25:25.144+00:00 INFO  [rpc-replay] Hit-rate: 76.81 %
+2022-08-18T14:25:25.144+00:00 INFO  [rpc-replay] Response Latency (us): p25: 0 p50: 0 p75: 0 p90: 0 p99: 0 p999: 0 p9999: 0
+2022-08-18T14:26:25.146+00:00 INFO  [rpc-replay] -----
+2022-08-18T14:26:25.146+00:00 INFO  [rpc-replay] Window: 26
+2022-08-18T14:26:25.146+00:00 INFO  [rpc-replay] Connections: Attempts: 0 Opened: 0 Errors: 0 Timeouts: 0 Open: 0
+2022-08-18T14:26:25.146+00:00 INFO  [rpc-replay] Rate: Request: 418659.94 rps Response: 418659.92 rps Connect: 0.00 cps
+2022-08-18T14:26:25.146+00:00 INFO  [rpc-replay] Success: Request: 100.00 % Response: 100.00 % Connect: 100.00 %
+2022-08-18T14:26:25.146+00:00 INFO  [rpc-replay] Hit-rate: 76.97 %
+2022-08-18T14:26:25.146+00:00 INFO  [rpc-replay] Response Latency (us): p25: 0 p50: 0 p75: 0 p90: 0 p99: 0 p999: 0 p9999: 0
+2022-08-18T14:27:25.138+00:00 INFO  [rpc-replay] -----
+2022-08-18T14:27:25.138+00:00 INFO  [rpc-replay] Window: 27
+2022-08-18T14:27:25.138+00:00 INFO  [rpc-replay] Connections: Attempts: 0 Opened: 0 Errors: 0 Timeouts: 0 Open: 0
+2022-08-18T14:27:25.138+00:00 INFO  [rpc-replay] Rate: Request: 417374.40 rps Response: 417374.42 rps Connect: 0.00 cps
+2022-08-18T14:27:25.138+00:00 INFO  [rpc-replay] Success: Request: 100.00 % Response: 100.00 % Connect: 100.00 %
+2022-08-18T14:27:25.138+00:00 INFO  [rpc-replay] Hit-rate: 76.87 %
+2022-08-18T14:27:25.138+00:00 INFO  [rpc-replay] Response Latency (us): p25: 0 p50: 0 p75: 0 p90: 0 p99: 0 p999: 0 p9999: 0
+2022-08-18T14:28:25.140+00:00 INFO  [rpc-replay] -----
+2022-08-18T14:28:25.140+00:00 INFO  [rpc-replay] Window: 28
+2022-08-18T14:28:25.140+00:00 INFO  [rpc-replay] Connections: Attempts: 0 Opened: 0 Errors: 0 Timeouts: 0 Open: 0
+2022-08-18T14:28:25.140+00:00 INFO  [rpc-replay] Rate: Request: 416525.50 rps Response: 416525.48 rps Connect: 0.00 cps
+2022-08-18T14:28:25.140+00:00 INFO  [rpc-replay] Success: Request: 100.00 % Response: 100.00 % Connect: 100.00 %
+2022-08-18T14:28:25.140+00:00 INFO  [rpc-replay] Hit-rate: 77.27 %
+2022-08-18T14:28:25.140+00:00 INFO  [rpc-replay] Response Latency (us): p25: 0 p50: 0 p75: 0 p90: 0 p99: 0 p999: 0 p9999: 0
+2022-08-18T14:29:25.143+00:00 INFO  [rpc-replay] -----
+2022-08-18T14:29:25.143+00:00 INFO  [rpc-replay] Window: 29
+2022-08-18T14:29:25.143+00:00 INFO  [rpc-replay] Connections: Attempts: 0 Opened: 0 Errors: 0 Timeouts: 0 Open: 0
+2022-08-18T14:29:25.143+00:00 INFO  [rpc-replay] Rate: Request: 417015.17 rps Response: 417015.18 rps Connect: 0.00 cps
+2022-08-18T14:29:25.143+00:00 INFO  [rpc-replay] Success: Request: 100.00 % Response: 100.00 % Connect: 100.00 %
+2022-08-18T14:29:25.143+00:00 INFO  [rpc-replay] Hit-rate: 77.65 %
+2022-08-18T14:29:25.143+00:00 INFO  [rpc-replay] Response Latency (us): p25: 0 p50: 0 p75: 0 p90: 0 p99: 0 p999: 0 p9999: 0
+2022-08-18T14:30:25.146+00:00 INFO  [rpc-replay] -----
+2022-08-18T14:30:25.146+00:00 INFO  [rpc-replay] Window: 30
+2022-08-18T14:30:25.146+00:00 INFO  [rpc-replay] Connections: Attempts: 0 Opened: 0 Errors: 0 Timeouts: 0 Open: 0
+2022-08-18T14:30:25.146+00:00 INFO  [rpc-replay] Rate: Request: 419605.14 rps Response: 419605.15 rps Connect: 0.00 cps
+2022-08-18T14:30:25.146+00:00 INFO  [rpc-replay] Success: Request: 100.00 % Response: 100.00 % Connect: 100.00 %
+2022-08-18T14:30:25.146+00:00 INFO  [rpc-replay] Hit-rate: 77.06 %
+2022-08-18T14:30:25.146+00:00 INFO  [rpc-replay] Response Latency (us): p25: 0 p50: 0 p75: 0 p90: 0 p99: 0 p999: 0 p9999: 0
+2022-08-18T14:31:25.143+00:00 INFO  [rpc-replay] -----
+2022-08-18T14:31:25.143+00:00 INFO  [rpc-replay] Window: 31
+2022-08-18T14:31:25.143+00:00 INFO  [rpc-replay] Connections: Attempts: 0 Opened: 0 Errors: 0 Timeouts: 0 Open: 0
+2022-08-18T14:31:25.143+00:00 INFO  [rpc-replay] Rate: Request: 419913.53 rps Response: 419913.51 rps Connect: 0.00 cps
+2022-08-18T14:31:25.143+00:00 INFO  [rpc-replay] Success: Request: 100.00 % Response: 100.00 % Connect: 100.00 %
+2022-08-18T14:31:25.143+00:00 INFO  [rpc-replay] Hit-rate: 76.06 %
+2022-08-18T14:31:25.143+00:00 INFO  [rpc-replay] Response Latency (us): p25: 0 p50: 0 p75: 0 p90: 0 p99: 0 p999: 0 p9999: 0
+2022-08-18T14:32:25.141+00:00 INFO  [rpc-replay] -----
+2022-08-18T14:32:25.141+00:00 INFO  [rpc-replay] Window: 32
+2022-08-18T14:32:25.141+00:00 INFO  [rpc-replay] Connections: Attempts: 0 Opened: 0 Errors: 0 Timeouts: 0 Open: 0
+2022-08-18T14:32:25.141+00:00 INFO  [rpc-replay] Rate: Request: 419023.60 rps Response: 419023.60 rps Connect: 0.00 cps
+2022-08-18T14:32:25.141+00:00 INFO  [rpc-replay] Success: Request: 100.00 % Response: 100.00 % Connect: 100.00 %
+2022-08-18T14:32:25.141+00:00 INFO  [rpc-replay] Hit-rate: 74.25 %
+2022-08-18T14:32:25.141+00:00 INFO  [rpc-replay] Response Latency (us): p25: 0 p50: 0 p75: 0 p90: 0 p99: 0 p999: 0 p9999: 0
+2022-08-18T14:33:25.138+00:00 INFO  [rpc-replay] -----
+2022-08-18T14:33:25.138+00:00 INFO  [rpc-replay] Window: 33
+2022-08-18T14:33:25.138+00:00 INFO  [rpc-replay] Connections: Attempts: 0 Opened: 0 Errors: 0 Timeouts: 0 Open: 0
+2022-08-18T14:33:25.138+00:00 INFO  [rpc-replay] Rate: Request: 416480.33 rps Response: 416480.33 rps Connect: 0.00 cps
+2022-08-18T14:33:25.138+00:00 INFO  [rpc-replay] Success: Request: 100.00 % Response: 100.00 % Connect: 100.00 %
+2022-08-18T14:33:25.138+00:00 INFO  [rpc-replay] Hit-rate: 73.01 %
+2022-08-18T14:33:25.138+00:00 INFO  [rpc-replay] Response Latency (us): p25: 0 p50: 0 p75: 0 p90: 0 p99: 0 p999: 0 p9999: 0
+2022-08-18T14:34:25.137+00:00 INFO  [rpc-replay] -----
+2022-08-18T14:34:25.137+00:00 INFO  [rpc-replay] Window: 34
+2022-08-18T14:34:25.137+00:00 INFO  [rpc-replay] Connections: Attempts: 0 Opened: 0 Errors: 0 Timeouts: 0 Open: 0
+2022-08-18T14:34:25.137+00:00 INFO  [rpc-replay] Rate: Request: 420603.33 rps Response: 420603.35 rps Connect: 0.00 cps
+2022-08-18T14:34:25.137+00:00 INFO  [rpc-replay] Success: Request: 100.00 % Response: 100.00 % Connect: 100.00 %
+2022-08-18T14:34:25.137+00:00 INFO  [rpc-replay] Hit-rate: 72.68 %
+2022-08-18T14:34:25.137+00:00 INFO  [rpc-replay] Response Latency (us): p25: 0 p50: 0 p75: 0 p90: 0 p99: 0 p999: 0 p9999: 0
+2022-08-18T14:35:25.140+00:00 INFO  [rpc-replay] -----
+2022-08-18T14:35:25.140+00:00 INFO  [rpc-replay] Window: 35
+2022-08-18T14:35:25.140+00:00 INFO  [rpc-replay] Connections: Attempts: 0 Opened: 0 Errors: 0 Timeouts: 0 Open: 0
+2022-08-18T14:35:25.140+00:00 INFO  [rpc-replay] Rate: Request: 422637.66 rps Response: 422637.64 rps Connect: 0.00 cps
+2022-08-18T14:35:25.140+00:00 INFO  [rpc-replay] Success: Request: 100.00 % Response: 100.00 % Connect: 100.00 %
+2022-08-18T14:35:25.140+00:00 INFO  [rpc-replay] Hit-rate: 71.90 %
+2022-08-18T14:35:25.140+00:00 INFO  [rpc-replay] Response Latency (us): p25: 0 p50: 0 p75: 0 p90: 0 p99: 0 p999: 0 p9999: 0
+2022-08-18T14:36:25.139+00:00 INFO  [rpc-replay] -----
+2022-08-18T14:36:25.139+00:00 INFO  [rpc-replay] Window: 36
+2022-08-18T14:36:25.139+00:00 INFO  [rpc-replay] Connections: Attempts: 0 Opened: 0 Errors: 0 Timeouts: 0 Open: 0
+2022-08-18T14:36:25.139+00:00 INFO  [rpc-replay] Rate: Request: 419681.15 rps Response: 419681.13 rps Connect: 0.00 cps
+2022-08-18T14:36:25.139+00:00 INFO  [rpc-replay] Success: Request: 100.00 % Response: 100.00 % Connect: 100.00 %
+2022-08-18T14:36:25.139+00:00 INFO  [rpc-replay] Hit-rate: 70.67 %
+2022-08-18T14:36:25.140+00:00 INFO  [rpc-replay] Response Latency (us): p25: 0 p50: 0 p75: 0 p90: 0 p99: 0 p999: 0 p9999: 0
+2022-08-18T14:37:25.141+00:00 INFO  [rpc-replay] -----
+2022-08-18T14:37:25.141+00:00 INFO  [rpc-replay] Window: 37
+2022-08-18T14:37:25.141+00:00 INFO  [rpc-replay] Connections: Attempts: 0 Opened: 0 Errors: 0 Timeouts: 0 Open: 0
+2022-08-18T14:37:25.141+00:00 INFO  [rpc-replay] Rate: Request: 418351.66 rps Response: 418351.67 rps Connect: 0.00 cps
+2022-08-18T14:37:25.141+00:00 INFO  [rpc-replay] Success: Request: 100.00 % Response: 100.00 % Connect: 100.00 %
+2022-08-18T14:37:25.141+00:00 INFO  [rpc-replay] Hit-rate: 69.85 %
+2022-08-18T14:37:25.142+00:00 INFO  [rpc-replay] Response Latency (us): p25: 0 p50: 0 p75: 0 p90: 0 p99: 0 p999: 0 p9999: 0

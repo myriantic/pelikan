@@ -1,4 +1,4 @@
-daemonize = false
+daemonize = true
 
 [admin]
 # interfaces listening on
@@ -22,16 +22,18 @@ timeout = 100
 # epoll max events returned
 nevent = 1024
 # number of worker threads
-threads = 1
+threads = 32
 
 # storage configuration
 [seg]
 # hash power adjusts how many items can be held in the hashtable
-hash_power = 3
-# total bytes to use for item storage - 32 segments * 1024 segment size
-heap_size = 32768
+hash_power = 32
+# total bytes to use for item storage - 4096 segments * 8MB segment size
+# heap_size = 17179869184
+# 32 Gb
+heap_size = 34359738368 
 # size of each segment in bytes
-segment_size = 1024
+segment_size = 8388608
 # number of segments for a non-evict compaction
 compact_target = 2
 # number of segments to merge in one merge eviction pass
@@ -41,15 +43,13 @@ merge_max = 8
 # use merge based eviction
 eviction = "Merge"
 # optionally, set a file path to back the data datapool
-datapool_path = "/home/users/u6688826/file_for_data"
-#datapool_path = "/mnt/pmem1.0/cassy/data"
+datapool_path = "/mnt/pmem1.0/harris/file_for_data3"
 # set a file path to back the metadata datapool
-metadata_path = "/home/users/u6688826/file_for_metadata"
-#metadata_path = "/mnt/pmem1.0/cassy/metadata"
+metadata_path = "/mnt/pmem1.0/harris/file_for_metadata3"
 # state whether cache will be restored
 restore = false
 # state whether cache will be flushed upon shutdown
-graceful_shutdown = true
+graceful_shutdown = false
 
 [time]
 time_type = "Memcache"
