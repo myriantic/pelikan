@@ -17,7 +17,7 @@ rpc_perf = '/home/users/u6688826/rpc-perf' # TODO
 cache_binary = pelikan+"/"+'target/release/pelikan_segcache_rs'
 config = pelikan+"/"+'config/segcache_perf_analysis.toml'
 trace = 'benchmarks/cluster052.zst'
-replay_command = 'cargo run --release --bin rpc-replay -- --poolsize 100 --workers 4 --speed 1.0 --binary-trace --endpoint localhost:12321 --trace '+trace
+replay_command = 'cargo run --release --bin rpc-replay -- --poolsize 100 --workers 4 --rate 10000000 --binary-trace --endpoint localhost:12321 --trace '+trace
 admin_command = 'telnet localhost 9999'
 
 # -------- Spawn Segcache as a non-blocking process ------------------------

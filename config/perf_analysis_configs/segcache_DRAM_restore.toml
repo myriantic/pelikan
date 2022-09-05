@@ -22,11 +22,16 @@ timeout = 100
 # epoll max events returned
 nevent = 1024
 # number of worker threads
+<<<<<<< HEAD:config/perf_analysis_configs/segcache_DRAM_false.toml
 threads = 32
+=======
+threads = 4
+>>>>>>> bb9c7f5dbac963ad8d1ef66486df24080cc569d2:config/perf_analysis_configs/segcache_DRAM_restore.toml
 
 # storage configuration
 [seg]
 # hash power adjusts how many items can be held in the hashtable
+<<<<<<< HEAD:config/perf_analysis_configs/segcache_DRAM_false.toml
 hash_power = 32
 # total bytes to use for item storage - 4096 segments * 8MB segment size
 # heap_size = 17179869184
@@ -34,6 +39,13 @@ hash_power = 32
 heap_size = 34359738368 
 # size of each segment in bytes
 segment_size = 8388608
+=======
+hash_power = 24
+# 8 Gb
+heap_size = 17179869184
+# size of each segment in bytes
+segment_size = 2097152
+>>>>>>> bb9c7f5dbac963ad8d1ef66486df24080cc569d2:config/perf_analysis_configs/segcache_DRAM_restore.toml
 # number of segments for a non-evict compaction
 compact_target = 2
 # number of segments to merge in one merge eviction pass

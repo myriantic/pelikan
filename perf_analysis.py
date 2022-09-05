@@ -14,20 +14,20 @@ import warnings
 warnings.filterwarnings("ignore")
 
 # Directories
-home = '/home/users/u6688826'
-pelikan = home + '/pelikan' 
+home     = '/home/users/u6688826'
+pelikan  = home + '/pelikan' 
 rpc_perf = home + '/rpc-perf'
 cache_binary  = pelikan + "/target/release/pelikan_segcache_rs"
 config_folder = pelikan + "/config/perf_analysis_configs"
 output_folder = pelikan + "/outputs"
 
 # Traces
-trace_1 = 'benchmarks/cluster052.zst'
-trace_2 = 'benchmarks/cluster052.zst'
+trace_1 = 'benchmarks/cluster52.0.zst'
+trace_2 = 'benchmarks/cluster52.1.zst'
 
 # Commands
-replay_command_1 = 'cargo run --release --bin rpc-replay -- --speed 1.0 --poolsize 100 --workers 4 --binary-trace --endpoint localhost:12321 --trace ' + trace_1
-replay_command_2 = 'cargo run --release --bin rpc-replay -- --speed 1.0 --poolsize 100 --workers 4 --binary-trace --endpoint localhost:12321 --trace ' + trace_2
+replay_command_1 = 'cargo run --release --bin rpc-replay -- --speed 1.0 --poolsize 100 --workers 4 --endpoint localhost:12321 --trace ' + trace_1
+replay_command_2 = 'cargo run --release --bin rpc-replay -- --rate 10000000 --poolsize 100 --workers 4 --endpoint localhost:12321 --trace ' + trace_2
 
 admin_command = 'telnet localhost 9999'
 
@@ -41,6 +41,9 @@ stats = "stats".encode("ascii") + b"\r\n"
 
 for config in os.listdir(config_folder):
 
+    # print(config)
+    # exit()
+
     config_path = config_folder + "/" + config
 
     output_file = f"{output_folder}/{config}_output.txt"
@@ -52,15 +55,22 @@ for config in os.listdir(config_folder):
 
     cache_spawn = subprocess.Popen([cache_binary,config_path])
 
+    print(cache_binary, config_path)
+
     # -------- Replay the trace on the cache as a blocking process -------------
     os.chdir(rpc_perf)
     # replay_start = time.time()
 
+    print("Running rpc_perf")
+
     # This sends cache requests to the server port
     replay = subprocess.Popen(replay_command_1.split())
     replay.wait()
+
+    print("rpc_perf finished")
     # replay_time = time.time() - replay_start
 
+    print("Shutting Down Cache")
     # Open Admin Connection
     admin_conn = telnetlib.Telnet(HOST, PORT)
     admin_conn.set_debuglevel(2)
@@ -84,6 +94,7 @@ for config in os.listdir(config_folder):
 
     # shutdown_time = time.time() - shutdown_start
 
+    exit()
     ### Iteration 2 ###
 
     print("Running Iteration 2:")

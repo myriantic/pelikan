@@ -1,5 +1,3 @@
-use crate::datapool::*;
-
 /// Copies `size` bytes at `byte_ptr` to the `offset` of `data`
 /// Returns the next `offset`, that is, the next byte of `data` to be copied into
 pub fn store_bytes_and_update_offset(

@@ -8,7 +8,7 @@ use crate::datapool::*;
 use crate::Value;
 use crate::*;
 use std::cmp::min;
-use std::path::{PathBuf, Path};
+use std::path::PathBuf;
 
 use metrics::{static_metrics, Counter};
 
@@ -69,11 +69,12 @@ impl Seg {
 
         if self.graceful_shutdown {
 
-            // Backup Datapool
-            if let Some(file) = &self.datapool_path {
+            // Backup Datapool if path given
+            if let Some(_) = &self.datapool_path {
                 self.segments.flush_data()?;
                 return Ok(());
             }
+
         }
 
         Err(std::io::Error::new(

@@ -388,7 +388,16 @@ impl Datapool for FileBacked
             self.file.seek(SeekFrom::Start(0))?;
         }
 
+<<<<<<< HEAD
         self.file.sync_all()?;
+=======
+        // Create Datapool and Write Data
+        {
+            let datapool = FileBacked::determine(&path, 2 * page_size).expect("failed to create pool");
+            
+            // put data in box (to simulate)
+            let mut data = Box::new(datapool);
+>>>>>>> bb9c7f5dbac963ad8d1ef66486df24080cc569d2
 
         Ok(())
     }

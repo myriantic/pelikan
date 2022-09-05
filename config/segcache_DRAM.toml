@@ -22,18 +22,26 @@ timeout = 100
 # epoll max events returned
 nevent = 1024
 # number of worker threads
-threads = 32
+threads = 4
 
 # storage configuration
 [seg]
 # hash power adjusts how many items can be held in the hashtable
-hash_power = 32
-# total bytes to use for item storage - 4096 segments * 8MB segment size
-# heap_size = 17179869184
-# 32 Gb
-heap_size = 34359738368 
+<<<<<<< HEAD:config/perf_analysis_configs/segcache_dram_only_2.toml
+hash_power = 27
+# total bytes to use for item storage - 32 segments * 1024 segment size
+# heap_size = 34359738368
+heap_size = 3221225472 
 # size of each segment in bytes
-segment_size = 8388608
+# segment_size = 8388608
+segment_size = 1048576
+=======
+hash_power = 24
+# 8 Gb
+heap_size = 17179869184
+# size of each segment in bytes
+segment_size = 2097152
+>>>>>>> bb9c7f5dbac963ad8d1ef66486df24080cc569d2:config/segcache_DRAM.toml
 # number of segments for a non-evict compaction
 compact_target = 2
 # number of segments to merge in one merge eviction pass
@@ -43,20 +51,20 @@ merge_max = 8
 # use merge based eviction
 eviction = "Merge"
 # optionally, set a file path to back the data datapool
-<<<<<<< HEAD:config/perf_analysis_configs/segcache_DRAM_false.toml
-datapool_path = "/mnt/pmem1.0/harris/file_for_data3"
+<<<<<<< HEAD:config/perf_analysis_configs/segcache_dram_only_2.toml
+datapool_path = "/mnt/pmem1.0/harris/file_for_data_hybrid_pmem_TEST"
 # set a file path to back the metadata datapool
-metadata_path = "/mnt/pmem1.0/harris/file_for_metadata3"
+metadata_path = "/mnt/pmem1.0/harris/file_for_metadata_hybrid_pmem_TEST"
 =======
 datapool_path = "/home/users/u6688826/file_for_data"
 # datapool_path = "/mnt/pmem1.0/cassy/data"
 # set a file path to back the metadata datapool
 metadata_path = "/home/users/u6688826/file_for_metadata"
->>>>>>> bb9c7f5dbac963ad8d1ef66486df24080cc569d2:config/perf_analysis_configs/segcache_DRAM_restore.toml
+>>>>>>> bb9c7f5dbac963ad8d1ef66486df24080cc569d2:config/segcache_DRAM.toml
 # state whether cache will be restored
 restore = true
 # state whether cache will be flushed upon shutdown
-graceful_shutdown = false
+graceful_shutdown = true
 
 [time]
 time_type = "Memcache"
