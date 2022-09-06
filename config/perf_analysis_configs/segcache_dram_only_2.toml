@@ -14,26 +14,25 @@ port = "12321"
 # epoll timeout in milliseconds
 timeout = 100
 # epoll max events returned
-nevent = 1024
+nevent = 8192
 
 [worker]
 # epoll timeout in milliseconds
 timeout = 100
 # epoll max events returned
-nevent = 1024
+nevent = 2048
 # number of worker threads
-threads = 4
+threads = 256
 
 # storage configuration
 [seg]
 # hash power adjusts how many items can be held in the hashtable
-hash_power = 27
-# total bytes to use for item storage - 32 segments * 1024 segment size
-# heap_size = 34359738368
-heap_size = 3221225472 
+hash_power = 31
+heap_size = 34359738368
+# heap_size = 3221225472 
 # size of each segment in bytes
-# segment_size = 8388608
-segment_size = 1048576
+segment_size = 8388608
+# segment_size = 1048576
 # number of segments for a non-evict compaction
 compact_target = 2
 # number of segments to merge in one merge eviction pass
@@ -49,7 +48,7 @@ metadata_path = "/mnt/pmem1.0/harris/file_for_metadata_hybrid_pmem_TEST"
 # state whether cache will be restored
 restore = true
 # state whether cache will be flushed upon shutdown
-graceful_shutdown = true
+graceful_shutdown = false
 
 [time]
 time_type = "Memcache"
